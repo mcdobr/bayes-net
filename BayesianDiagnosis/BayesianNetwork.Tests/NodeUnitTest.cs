@@ -10,7 +10,7 @@ namespace BayesianNetwork.Tests
         public void TestAddingEdgesToNodes()
         {
             Node cause = new Node("cauza", new[] { "True", "False" });
-            Node effect = new Node("effect", new[] { "True", "False" });
+            Node effect = new Node("efect", new[] { "True", "False" });
 
             cause.addEffect(effect);
             Assert.AreEqual(1, cause.Effects.Count);

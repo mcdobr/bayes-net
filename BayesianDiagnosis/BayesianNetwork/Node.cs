@@ -13,8 +13,9 @@ namespace BayesianNetwork
         private HashSet<string> domainValues;
         private ICollection<Node> causes;
         private ICollection<Node> effects;
+        private IDictionary<Query, double> probabilityDistribution;
 
-        public Node(String _name, IEnumerable<String> _domainValues)
+        public Node(string _name, IEnumerable<string> _domainValues)
         {
             name = _name;
 
@@ -26,7 +27,11 @@ namespace BayesianNetwork
 
             causes = new HashSet<Node>();
             effects = new HashSet<Node>();
+
+            probabilityDistribution = new Dictionary<Query, double>();
         }
+
+        public Node(string _name) : this(_name, new[] { "True", "False" }) { }
 
         public void addCause(Node cause)
         {
@@ -46,6 +51,17 @@ namespace BayesianNetwork
         public bool removeEffect(Node effect)
         {
             return effects.Remove(effect);
+        }
+
+        public void addProbability(Query query, double value)
+        {
+            probabilityDistribution.Add(query, value);
+        }
+
+        public string Name
+        {
+            get { return name; }
+            set { name = value; }
         }
 
         public ICollection<Node> Causes
