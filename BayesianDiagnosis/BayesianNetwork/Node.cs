@@ -9,8 +9,8 @@ namespace BayesianNetwork
 {
     public class Node
     {
-        private String name;
-        private HashSet<String> domainValues;
+        private string name;
+        private HashSet<string> domainValues;
         private ICollection<Node> causes;
         private ICollection<Node> effects;
 
