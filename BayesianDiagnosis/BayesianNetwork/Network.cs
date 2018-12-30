@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace BayesianNetwork
 {
+    /**
+     * Class that represents the actual bayesian network
+     */
     public class Network
     {
         private IDictionary<string, Node> nodes;

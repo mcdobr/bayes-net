@@ -73,5 +73,10 @@ namespace BayesianNetwork
         {
             get { return effects; }
         }
+
+        public IDictionary<Query, double> ProbabilityDistribution
+        {
+            get { return probabilityDistribution; }
+        }
     }
 }

@@ -45,7 +45,9 @@
     </When>
     <Otherwise>
       <ItemGroup>
-        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework">
+          <Private>False</Private>
+        </Reference>
       </ItemGroup>
     </Otherwise>
   </Choose>
@@ -53,6 +55,7 @@
     <Compile Include="NetworkUnitTest.cs" />
     <Compile Include="NodeUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QueryUnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BayesianNetwork\BayesianNetwork.csproj">

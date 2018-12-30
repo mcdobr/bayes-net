@@ -28,8 +28,8 @@ namespace BayesianNetwork.Tests
             mockNetwork.addLink("febra", "oboseala");
             mockNetwork.addLink("febra", "anorexie");
 
-            Query gripaTrueQuery = new Query(new Evidence(), "True");
-            Query gripaFalseQuery = new Query(new Evidence(), "False");
+            Query gripaTrueQuery = new Query(mockNetwork.Nodes["gripa"], new Evidence(), "True");
+            Query gripaFalseQuery = new Query(mockNetwork.Nodes["gripa"], new Evidence(), "False");
 
             mockNetwork.Nodes["gripa"].addProbability(gripaTrueQuery, 0.9);
             mockNetwork.Nodes["gripa"].addProbability(gripaFalseQuery, 0.1);
@@ -38,9 +38,10 @@ namespace BayesianNetwork.Tests
         [TestMethod]
         public void TestAskingQuestions()
         {
-            Query q = new Query(new Evidence(), "True");
+            Node gripa = mockNetwork.getNodeByName("gripa");
+            Query q = new Query(gripa, new Evidence(), "True");
 
-            Assert.Fail();
+            Assert.AreEqual(0.9, gripa.ProbabilityDistribution[q], 1e-3);
         }
     }
 }

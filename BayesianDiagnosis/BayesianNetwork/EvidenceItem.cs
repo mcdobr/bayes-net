@@ -34,5 +34,24 @@ namespace BayesianNetwork
         {
             get { return value; }
         }
+
+        public Network Network
+        {
+            get { return network; }
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null || GetType() != obj.GetType())
+                return false;
+
+            EvidenceItem other = obj as EvidenceItem;
+            return Node == other.Node && value == other.Value && Network == other.Network;
+        }
+
+        public override int GetHashCode()
+        {
+            return string.Format("{0};{1};{2}", Node, Value, Network).GetHashCode();
+        }
     }
 }
