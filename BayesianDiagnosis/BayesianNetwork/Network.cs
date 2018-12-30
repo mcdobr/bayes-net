@@ -39,17 +39,18 @@ namespace BayesianNetwork
             throw new NotImplementedException();
         }
 
-        public void addLink(Node cause, Node effect)
+        public Network addLink(Node cause, Node effect)
         {
             cause.addEffect(effect);
             effect.addCause(cause);
+            return this;
         }
 
-        public void addLink(string cause, string effect)
+        public Network addLink(string cause, string effect)
         {
             Node causeNode = getNodeByName(cause);
             Node effectNode = getNodeByName(effect);
-            addLink(causeNode, effectNode);
+            return addLink(causeNode, effectNode);
         }
 
         public void removeLink(Node cause, Node effect)

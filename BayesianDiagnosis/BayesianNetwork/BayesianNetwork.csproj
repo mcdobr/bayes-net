@@ -40,7 +40,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Evidence.cs" />
     <Compile Include="EvidenceItem.cs" />
     <Compile Include="Network.cs" />
     <Compile Include="Node.cs" />

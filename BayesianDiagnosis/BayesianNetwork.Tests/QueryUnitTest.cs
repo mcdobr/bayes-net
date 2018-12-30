@@ -2,6 +2,7 @@
 using System.Text;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Linq;
 
 namespace BayesianNetwork.Tests
 {
@@ -15,8 +16,8 @@ namespace BayesianNetwork.Tests
         public void TestQueriesAreEqual()
         {
             Node mockNode = new Node("mock");
-            Query q = new Query(mockNode, new Evidence(), "True");
-            Query o = new Query(mockNode, new Evidence(), "True");
+            Query q = new Query(Enumerable.Empty<EvidenceItem>(), "True");
+            Query o = new Query(Enumerable.Empty<EvidenceItem>(), "True");
 
             Console.WriteLine(q.GetHashCode());
             Console.WriteLine(o.GetHashCode());

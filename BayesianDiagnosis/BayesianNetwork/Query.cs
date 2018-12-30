@@ -11,32 +11,23 @@ namespace BayesianNetwork
      */
     public class Query
     {
-        private readonly Node target;
-        private readonly Evidence evidence;
+        private readonly ICollection<EvidenceItem> evidence;
         private readonly string value;
 
-        public Query(Node _target, Evidence _evidence, string _value)
+        public Query(IEnumerable<EvidenceItem> _evidence, string _value)
         {
-            target = _target;
-            evidence = _evidence;
+            evidence = new HashSet<EvidenceItem>(_evidence);
             value = _value;
         }
 
         public Query addEvidenceItem(EvidenceItem item)
         {
-            Evidence newEvidence = this.evidence.addEvidenceItem(item);
-            return new Query(Target, newEvidence, Value);
+            ICollection<EvidenceItem> newEvidence = new HashSet<EvidenceItem>(this.Evidence);
+            newEvidence.Add(item);
+            return new Query(newEvidence, Value);
         }
 
-        public Node Target
-        {
-            get
-            {
-                return target;
-            }
-        }
-
-        public Evidence Evidence
+        public ICollection<EvidenceItem> Evidence
         {
             get
             {
@@ -60,12 +51,12 @@ namespace BayesianNetwork
 
             Query other = obj as Query;
 
-            return Target == other.Target && Evidence == other.Evidence && Value == other.Value;
+            return (new HashSet<EvidenceItem>(Evidence)).SetEquals(other.Evidence) && Value == other.Value;
         }
 
         public override int GetHashCode()
         {
-            return string.Format("{0}/{1}/{2}", Target, Evidence, Value).GetHashCode();
+            return string.Format("{0}/{1}", Evidence, Value).GetHashCode();
         }
     }
 }
