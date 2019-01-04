@@ -11,38 +11,23 @@ namespace BayesianNetwork
      */
     public class Query
     {
-        private readonly ICollection<EvidenceItem> evidence;
+        private readonly ICollection<Fact> facts;
+        private readonly Node target;
         private readonly string value;
 
-        public Query(IEnumerable<EvidenceItem> _evidence, string _value)
+        public Query(Node _target, string _value, IEnumerable<Fact> _facts)
         {
-            evidence = new HashSet<EvidenceItem>(_evidence);
+            target = _target;
             value = _value;
+            facts = new HashSet<Fact>(_facts);
         }
 
-        public Query addEvidenceItem(EvidenceItem item)
+        public Query addFact(Fact item)
         {
-            ICollection<EvidenceItem> newEvidence = new HashSet<EvidenceItem>(this.Evidence);
+            ICollection<Fact> newEvidence = new HashSet<Fact>(this.Facts);
             newEvidence.Add(item);
-            return new Query(newEvidence, Value);
+            return new Query(Target, Value, newEvidence);
         }
-
-        public ICollection<EvidenceItem> Evidence
-        {
-            get
-            {
-                return evidence;
-            }
-        }
-
-        public string Value
-        {
-            get
-            {
-                return value;
-            }
-        }
-
 
         public override bool Equals(object obj)
         {
@@ -51,12 +36,33 @@ namespace BayesianNetwork
 
             Query other = obj as Query;
 
-            return (new HashSet<EvidenceItem>(Evidence)).SetEquals(other.Evidence) && Value == other.Value;
+            return (new HashSet<Fact>(Facts)).SetEquals(other.Facts) && Value == other.Value;
         }
 
         public override int GetHashCode()
         {
-            return string.Format("{0}/{1}", Evidence, Value).GetHashCode();
+            return string.Format("{0}/{1}/{2}", Target, Value, Facts).GetHashCode();
+        }
+        
+        public ICollection<Fact> Facts
+        {
+            get
+            {
+                return facts;
+            }
+        }
+
+        public Node Target
+        {
+            get { return target; }
+        }
+
+        public string Value
+        {
+            get
+            {
+                return value;
+            }
         }
     }
 }

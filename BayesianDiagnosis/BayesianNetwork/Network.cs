@@ -20,7 +20,7 @@ namespace BayesianNetwork
 
         public Network addNode(string _name, IEnumerable<string> _domainValues)
         {
-            nodes.Add(_name, new Node(_name, _domainValues));
+            nodes.Add(_name, new Node(_name, _domainValues, this));
             return this;
         }
 
@@ -63,11 +63,6 @@ namespace BayesianNetwork
             throw new NotImplementedException();
         }
 
-        public IDictionary<string, Node> Nodes
-        {
-            get { return nodes; }
-        }
-
         public Node getNodeByName(string nodeName)
         {
             Node requestedNode;
@@ -76,6 +71,92 @@ namespace BayesianNetwork
                 return requestedNode;
             else
                 throw new KeyNotFoundException();
+        }
+
+        public double answer(Query question)
+        {
+            var distribution = enumerationAsk(question.Target, question.Facts);
+            return distribution[question];
+        }
+
+        /**
+         * Compute the distribution of the target variable given a collection of facts
+         */
+        private Dictionary<Query, double> enumerationAsk(Node target, ICollection<Fact> facts)
+        {
+            var distribution = new Dictionary<Query, double>();
+            foreach (var possibleValue in target.DomainValues)
+            {
+                ICollection<Node> vars = target.Network.Nodes.Values;
+
+                // TODO: use topological sort
+                distribution[new Query(target, possibleValue, facts)] = enumerateAll(vars, facts);
+            }
+            
+            return normalizeDistribution(distribution);
+        }
+
+        /**
+         * Compute the probability recursively
+         */
+        private double enumerateAll(ICollection<Node> nodes, ICollection<Fact> facts)
+        {
+            if (nodes.Count == 0)
+            {
+                return 1.0;
+            }
+            else
+            {
+                var targetNode = nodes.First();
+                nodes.Remove(targetNode);
+
+                bool isTargetNodeSet = facts.Any(fact => fact.Node == targetNode);
+                if (isTargetNodeSet)
+                {
+                    string targetValue = facts.First(fact => fact.Node == targetNode).Value;   
+                    // Get parents' values
+                    var causalFacts = facts.Where(fact => targetNode.Causes.Any(node => node == fact.Node));
+                    // Compute P(targetNode = targetValue | parentsOf(targetNode))
+                    double probabilityOfTarget = targetNode.ProbabilityDistribution[new Query(targetNode, targetValue, causalFacts)];
+                    
+                    return probabilityOfTarget * enumerateAll(nodes, facts);
+                }
+                else
+                {
+                    double probabilityOfTarget = 0.0;
+                    foreach (string targetValue in targetNode.DomainValues)
+                    {
+                        // Get facts for parents
+                        var causalFacts = facts.Where(fact => targetNode.Causes.Any(node => node == fact.Node));
+
+                        // Probability if 
+                        double probabilityOfTargetCase = targetNode.ProbabilityDistribution[new Query(targetNode, targetValue, causalFacts)];
+
+                        //probabilityOfTarget += probabilityOfTargetCase * enumerateAll(;
+                    }
+
+                    return probabilityOfTarget;
+                }
+            }
+        }
+
+        private Dictionary<Query, double> normalizeDistribution(Dictionary<Query, double> distribution)
+        {
+            var normalized = new Dictionary<Query, double>();
+            double sumOfOldProbabilities = distribution.Values.Sum();
+            double alpha = 1 / sumOfOldProbabilities;
+
+            foreach (var kvp in distribution)
+            {
+                normalized[kvp.Key] = alpha * kvp.Value;
+            }
+
+            return normalized;
+        }
+        
+        public IDictionary<string, Node> Nodes
+        {
+            get { return nodes; }
         }
     }
 }

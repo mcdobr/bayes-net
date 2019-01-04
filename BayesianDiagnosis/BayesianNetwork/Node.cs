@@ -10,12 +10,13 @@ namespace BayesianNetwork
     public class Node
     {
         private string name;
-        private HashSet<string> domainValues;
+        private readonly HashSet<string> domainValues;
         private ICollection<Node> causes;
         private ICollection<Node> effects;
         private IDictionary<Query, double> probabilityDistribution;
+        private Network network;
 
-        public Node(string _name, IEnumerable<string> _domainValues)
+        public Node(string _name, IEnumerable<string> _domainValues, Network _network)
         {
             name = _name;
 
@@ -29,9 +30,10 @@ namespace BayesianNetwork
             effects = new HashSet<Node>();
 
             probabilityDistribution = new Dictionary<Query, double>();
+            network = _network;
         }
 
-        public Node(string _name) : this(_name, new[] { "True", "False" }) { }
+        public Node(string _name, Network _network) : this(_name, new[] { "True", "False" }, _network) { }
 
         public void addCause(Node cause)
         {
@@ -74,9 +76,20 @@ namespace BayesianNetwork
             get { return effects; }
         }
 
+        public ICollection<string> DomainValues
+        {
+            get { return domainValues; }   
+        }
+
         public IDictionary<Query, double> ProbabilityDistribution
         {
             get { return probabilityDistribution; }
+        }
+
+        public Network Network
+        {
+            get
+            { return network; }
         }
     }
 }

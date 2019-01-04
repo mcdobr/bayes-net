@@ -13,16 +13,37 @@ namespace BayesianNetwork.Tests
     public class QueryUnitTest
     {
         [TestMethod]
-        public void TestQueriesAreEqual()
+        public void TestQueriesShouldBeEqual()
         {
-            Node mockNode = new Node("mock");
-            Query q = new Query(Enumerable.Empty<EvidenceItem>(), "True");
-            Query o = new Query(Enumerable.Empty<EvidenceItem>(), "True");
+            Network mockNetwork = new Network();
+            Node mockNode = new Node("mock", mockNetwork);
 
-            Console.WriteLine(q.GetHashCode());
-            Console.WriteLine(o.GetHashCode());
+            Query one = new Query(mockNode, "True", Enumerable.Empty<Fact>());
+            Query two = new Query(mockNode, "True", Enumerable.Empty<Fact>());
+            Assert.AreEqual(one, two);
+        }
 
-            Assert.AreEqual(q, o);
+        [TestMethod]
+        public void TestQueriesShouldNotBeEqual()
+        {
+            Network mockNetwork = new Network();
+            Node mockNode = new Node("mock", mockNetwork);
+
+            Query one = new Query(mockNode, "True", Enumerable.Empty<Fact>());
+            Query two = new Query(mockNode, "False", Enumerable.Empty<Fact>());
+            Assert.AreNotEqual(one, two);
+        }
+
+        [TestMethod]
+        public void TestQueriesShouldHaveSameHashCode()
+        {
+            Network mockNetwork = new Network();
+            Node mockNode = new Node("mock", mockNetwork);
+
+            Query one = new Query(mockNode, "True", Enumerable.Empty<Fact>());
+            Query two = new Query(mockNode, "True", Enumerable.Empty<Fact>());
+
+            Assert.AreEqual(one.GetHashCode(), two.GetHashCode());
         }
     }
 }
