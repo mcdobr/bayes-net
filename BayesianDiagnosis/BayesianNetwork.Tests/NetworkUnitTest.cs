@@ -92,7 +92,7 @@ namespace BayesianNetwork.Tests
             Node gripa = mockNetwork.Nodes["gripa"];
             Query question = new Query(gripa, "True", evidence);
 
-            Assert.AreEqual(0.39628, mockNetwork.answer(question));
+            Assert.AreEqual(0.39628, mockNetwork.answer(question), 1e-4);
         }
     }
 }

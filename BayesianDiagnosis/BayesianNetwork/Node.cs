@@ -66,6 +66,11 @@ namespace BayesianNetwork
             set { name = value; }
         }
 
+        public override string ToString()
+        {
+            return name;
+        }
+
         public ICollection<Node> Causes
         {
             get { return causes; }

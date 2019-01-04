@@ -87,10 +87,11 @@ namespace BayesianNetwork
             var distribution = new Dictionary<Query, double>();
             foreach (var possibleValue in target.DomainValues)
             {
-                ICollection<Node> vars = target.Network.Nodes.Values;
+                var nodes = new List<Node>(target.Network.Nodes.Values);
+                var newFacts = new List<Fact>(facts);
+                newFacts.Add(new Fact(target, possibleValue));
 
-                // TODO: use topological sort
-                distribution[new Query(target, possibleValue, facts)] = enumerateAll(vars, facts);
+                distribution.Add(new Query(target, possibleValue, facts), enumerateAll(nodes, newFacts));
             }
             
             return normalizeDistribution(distribution);
@@ -101,6 +102,7 @@ namespace BayesianNetwork
          */
         private double enumerateAll(ICollection<Node> nodes, ICollection<Fact> facts)
         {
+
             if (nodes.Count == 0)
             {
                 return 1.0;
@@ -108,7 +110,9 @@ namespace BayesianNetwork
             else
             {
                 var targetNode = nodes.First();
-                nodes.Remove(targetNode);
+                // Remove node from node list
+                var newNodes = new List<Node>(nodes);
+                newNodes.Remove(targetNode);
 
                 bool isTargetNodeSet = facts.Any(fact => fact.Node == targetNode);
                 if (isTargetNodeSet)
@@ -118,8 +122,8 @@ namespace BayesianNetwork
                     var causalFacts = facts.Where(fact => targetNode.Causes.Any(node => node == fact.Node));
                     // Compute P(targetNode = targetValue | parentsOf(targetNode))
                     double probabilityOfTarget = targetNode.ProbabilityDistribution[new Query(targetNode, targetValue, causalFacts)];
-                    
-                    return probabilityOfTarget * enumerateAll(nodes, facts);
+
+                    return probabilityOfTarget * enumerateAll(newNodes, facts);
                 }
                 else
                 {
@@ -132,7 +136,10 @@ namespace BayesianNetwork
                         // Probability if 
                         double probabilityOfTargetCase = targetNode.ProbabilityDistribution[new Query(targetNode, targetValue, causalFacts)];
 
-                        //probabilityOfTarget += probabilityOfTargetCase * enumerateAll(;
+                        ICollection<Fact> newFacts = new List<Fact>(facts);
+                        newFacts.Add(new Fact(targetNode, targetValue));
+
+                        probabilityOfTarget += probabilityOfTargetCase * enumerateAll(newNodes, newFacts);
                     }
 
                     return probabilityOfTarget;

@@ -34,6 +34,11 @@ namespace BayesianNetwork
             return string.Format("{0};{1};", Node, Value).GetHashCode();
         }
 
+        public override string ToString()
+        {
+            return string.Format("{0}={1}", node, value);
+        }
+
         public Fact(string _nodeName, string _value, Network _network) : this(_network.getNodeByName(_nodeName), _value)
         { }
 
