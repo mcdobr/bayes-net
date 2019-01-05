@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BayesianNetwork", "Bayesian
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BayesianNetwork.Tests", "BayesianNetwork.Tests\BayesianNetwork.Tests.csproj", "{F974C048-06CE-4B9B-909E-7F6311A1096A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetworkParser", "NetworkParser\NetworkParser.csproj", "{55C4DCC3-F1B1-472C-9147-5BF53E08E34E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{F974C048-06CE-4B9B-909E-7F6311A1096A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F974C048-06CE-4B9B-909E-7F6311A1096A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F974C048-06CE-4B9B-909E-7F6311A1096A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55C4DCC3-F1B1-472C-9147-5BF53E08E34E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55C4DCC3-F1B1-472C-9147-5BF53E08E34E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55C4DCC3-F1B1-472C-9147-5BF53E08E34E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55C4DCC3-F1B1-472C-9147-5BF53E08E34E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

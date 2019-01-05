@@ -73,6 +73,9 @@ namespace BayesianNetwork
                 throw new KeyNotFoundException();
         }
 
+        /**
+         * Answers questions given some evidence
+         */
         public double answer(Query question)
         {
             var distribution = enumerationAsk(question.Target, question.Facts);

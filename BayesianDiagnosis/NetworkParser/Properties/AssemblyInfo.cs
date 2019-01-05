@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("BayesianNetwork.Create")]
+[assembly: AssemblyTitle("NetworkParser")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("BayesianNetwork.Create")]
+[assembly: AssemblyProduct("NetworkParser")]
 [assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("3e293cf4-0cef-4848-8519-9c0a1bfefba5")]
+[assembly: Guid("55c4dcc3-f1b1-472c-9147-5bf53e08e34e")]
 
 // Version information for an assembly consists of the following four values:
 //
