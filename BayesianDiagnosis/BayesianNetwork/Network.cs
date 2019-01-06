@@ -72,10 +72,7 @@ namespace BayesianNetwork
             else
                 throw new KeyNotFoundException();
         }
-
-        /**
-         * Answers questions given some evidence
-         */
+        
         public double answer(Query question)
         {
             var distribution = enumerationAsk(question.Target, question.Facts);
@@ -88,9 +85,12 @@ namespace BayesianNetwork
         private Dictionary<Query, double> enumerationAsk(Node target, ICollection<Fact> facts)
         {
             var distribution = new Dictionary<Query, double>();
+            //var nodes = new List<Node>(target.Network.Nodes.Values);
+            var nodes = topologicalSort(target.Network.Nodes.Values);
+
+
             foreach (var possibleValue in target.DomainValues)
             {
-                var nodes = new List<Node>(target.Network.Nodes.Values);
                 var newFacts = new List<Fact>(facts);
                 newFacts.Add(new Fact(target, possibleValue));
 
@@ -101,7 +101,7 @@ namespace BayesianNetwork
         }
 
         /**
-         * Compute the probability recursively
+         * Computes the probability of the given facts by recursing on all the states that include the supplied state
          */
         private double enumerateAll(ICollection<Node> nodes, ICollection<Fact> facts)
         {
@@ -112,37 +112,32 @@ namespace BayesianNetwork
             }
             else
             {
-                var targetNode = nodes.First();
-                // Remove node from node list
-                var newNodes = new List<Node>(nodes);
-                newNodes.Remove(targetNode);
+                var head = nodes.First();
 
-                bool isTargetNodeSet = facts.Any(fact => fact.Node == targetNode);
-                if (isTargetNodeSet)
+                var nodesTail = new List<Node>(nodes);
+                nodesTail.Remove(head);
+
+                bool isHeadSet = facts.Any(fact => fact.Node == head);
+                if (isHeadSet)
                 {
-                    string targetValue = facts.First(fact => fact.Node == targetNode).Value;   
-                    // Get parents' values
-                    var causalFacts = facts.Where(fact => targetNode.Causes.Any(node => node == fact.Node));
-                    // Compute P(targetNode = targetValue | parentsOf(targetNode))
-                    double probabilityOfTarget = targetNode.ProbabilityDistribution[new Query(targetNode, targetValue, causalFacts)];
+                    string headValue = facts.First(fact => fact.Node == head).Value;
+                    var causalFacts = facts.Where(fact => head.Causes.Any(node => node == fact.Node));
+                    double probabilityOfTarget = head.ProbabilityDistribution[new Query(head, headValue, causalFacts)];
 
-                    return probabilityOfTarget * enumerateAll(newNodes, facts);
+                    return probabilityOfTarget * enumerateAll(nodesTail, facts);
                 }
                 else
                 {
                     double probabilityOfTarget = 0.0;
-                    foreach (string targetValue in targetNode.DomainValues)
+                    foreach (string headValue in head.DomainValues)
                     {
-                        // Get facts for parents
-                        var causalFacts = facts.Where(fact => targetNode.Causes.Any(node => node == fact.Node));
-
-                        // Probability if 
-                        double probabilityOfTargetCase = targetNode.ProbabilityDistribution[new Query(targetNode, targetValue, causalFacts)];
+                        var causalFacts = facts.Where(fact => head.Causes.Any(node => node == fact.Node));
+                        double probabilityOfTargetCase = head.ProbabilityDistribution[new Query(head, headValue, causalFacts)];
 
                         ICollection<Fact> newFacts = new List<Fact>(facts);
-                        newFacts.Add(new Fact(targetNode, targetValue));
+                        newFacts.Add(new Fact(head, headValue));
 
-                        probabilityOfTarget += probabilityOfTargetCase * enumerateAll(newNodes, newFacts);
+                        probabilityOfTarget += probabilityOfTargetCase * enumerateAll(nodesTail, newFacts);
                     }
 
                     return probabilityOfTarget;
@@ -163,7 +158,48 @@ namespace BayesianNetwork
 
             return normalized;
         }
-        
+
+        private ICollection<Node> topologicalSort(ICollection<Node> nodes)
+        {
+            var stack = new Stack<Node>();
+            var isVisitedAlready = new Dictionary<Node, bool>();
+
+            var sortedNodes = new List<Node>();
+            foreach (var startNode in nodes)
+            {
+                if (!isVisitedAlready.ContainsKey(startNode))
+                {
+                    stack.Push(startNode);
+                    isVisitedAlready[startNode] = true;
+
+                    while (stack.Count > 0)
+                    {
+                        var topNode = stack.Peek();
+
+                        int visitedEffects = 0;
+                        foreach (var effect in topNode.Effects)
+                        {
+                            if (!isVisitedAlready.ContainsKey(effect))
+                            {
+                                stack.Push(effect);
+                                isVisitedAlready[effect] = true;
+                            }
+                            else
+                                ++visitedEffects;
+                        }
+
+                        bool shouldPop = (visitedEffects == topNode.Effects.Count);
+                        if (shouldPop)
+                            sortedNodes.Add(stack.Pop());
+                    }
+                }
+            }
+
+            sortedNodes.Reverse();
+            return sortedNodes;
+        }
+
+
         public IDictionary<string, Node> Nodes
         {
             get { return nodes; }
