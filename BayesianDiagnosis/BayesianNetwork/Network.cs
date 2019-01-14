@@ -26,7 +26,7 @@ namespace BayesianNetwork
 
         public Network addNode(string _name)
         {
-            return addNode(_name, new[] { "True", "False" });
+            return addNode(_name, new[] { "true", "false" });
         }
 
         public void removeNode(Node node)
