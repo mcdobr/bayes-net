@@ -8,7 +8,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>BayesianNetwork.Tests</RootNamespace>
     <AssemblyName>BayesianNetwork.Tests</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -16,6 +16,7 @@
     <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
     <IsCodedUITest>False</IsCodedUITest>
     <TestProjectType>UnitTest</TestProjectType>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -56,11 +57,16 @@
     <Compile Include="NodeUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryUnitTest.cs" />
+    <Compile Include="NetworkParserUnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BayesianNetwork\BayesianNetwork.csproj">
       <Project>{9b6108a0-1d3c-4b04-aa12-80f00446ccb5}</Project>
       <Name>BayesianNetwork</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NetworkParser\NetworkParser.csproj">
+      <Project>{55c4dcc3-f1b1-472c-9147-5bf53e08e34e}</Project>
+      <Name>NetworkParser</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

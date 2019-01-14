@@ -1,0 +1,307 @@
+<net>
+    <node>
+        <name>gripa</name>
+        <outcome>false</outcome>
+        <outcome>true</outcome>
+        
+        <table>
+            <probability>
+                <!-- Nu are părinți (multime vida = empty list) -->
+                <given>
+                </given>
+                
+                <outcome>false</outcome>
+                <value>0.9</value>
+            </probability>
+
+            <probability>
+                <!-- Nu are părinți -->
+                <given>
+                </given>
+                
+                <outcome>true</outcome>
+                <value>0.1</value>
+            </probability>
+        </table>
+    </node>
+
+    <node>
+        <name>abces</name>
+        <outcome>false</outcome>
+        <outcome>true</outcome>
+
+        <table>
+            <probability>
+                <!-- Nu are părinți -->
+                <given></given>
+                <outcome>false</outcome>
+                <value>0.95</value>
+            </probability>
+
+            <probability>
+                <!-- Nu are părinți -->
+                <given></given>
+                <outcome>true</outcome>
+                <value>0.05</value>
+            </probability>
+        </table>
+    </node>
+
+
+    <node>
+        <name>febra</name>
+        <outcome>false</outcome>
+        <outcome>true</outcome>
+
+        <table>
+            <!-- Probabilitatile ca febra sa fie fals în ordine crescător binară -->
+            <probability> <!-- P(0 | 00) -->
+                <given>
+                    <fact>
+                        <parent>gripa</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                    <fact>
+                        <parent>abces</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                </given>
+                <outcome>false</outcome>
+                <value>0.95</value>
+            </probability>
+
+            <probability> <!-- P(0 | 01) -->
+                <given>
+                    <fact>
+                        <parent>gripa</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                    <fact>
+                        <parent>abces</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                </given>
+                <outcome>false</outcome>
+                <value>0.75</value>
+            </probability>
+
+            <probability> <!-- P(0 | 10) -->
+                <given>
+                    <fact>
+                        <parent>gripa</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                    <fact>
+                        <parent>abces</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                </given>
+                <outcome>false</outcome>
+                <value>0.3</value>
+            </probability>
+
+            <probability> <!-- P(0 | 11) -->
+                <given>
+                    <fact>
+                        <parent>gripa</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                    <fact>
+                        <parent>abces</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                </given>
+                <outcome>false</outcome>
+                <value>0.2</value>
+            </probability>
+
+            <!-- Probabilitatile ca febra sa fie adevarat în ordine crescător binară -->
+            <probability> <!-- P(1 | 00) -->
+                <given>
+                    <fact>
+                        <parent>gripa</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                    <fact>
+                        <parent>abces</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                </given>
+                <outcome>true</outcome>
+                <value>0.05</value>
+            </probability>
+
+            <probability> <!-- P(1 | 01) -->
+                <given>
+                    <fact>
+                        <parent>gripa</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                    <fact>
+                        <parent>abces</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                </given>
+                <outcome>true</outcome>
+                <value>0.25</value>
+            </probability>
+
+            <probability> <!-- P(1 | 10) -->
+                <given>
+                    <fact>
+                        <parent>gripa</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                    <fact>
+                        <parent>abces</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                </given>
+                <outcome>true</outcome>
+                <value>0.7</value>
+            </probability>
+
+            <probability> <!-- P(1 | 11) -->
+                <given>
+                    <fact>
+                        <parent>gripa</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                    <fact>
+                        <parent>abces</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                </given>
+                <outcome>true</outcome>
+                <value>0.8</value>
+            </probability>
+        </table>
+    </node>
+
+
+    <node>
+        <name>oboseala</name>
+        <outcome>false</outcome>
+        <outcome>true</outcome>
+
+        <table>
+            <probability> <!-- P(0 | 0) -->
+                <given>
+                    <fact>
+                        <parent>febra</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                </given>
+                <outcome>false</outcome>
+                <value>0.8</value>
+            </probability>
+
+            <probability> <!-- P(0 | 1) -->
+                <given>
+                    <fact>
+                        <parent>febra</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                </given>
+                <outcome>false</outcome>
+                <value>0.4</value>
+            </probability>
+
+            <probability> <!-- P(1 | 0) -->
+                <given>
+                    <fact>
+                        <parent>febra</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                </given>
+                <outcome>true</outcome>
+                <value>0.2</value>
+            </probability>
+
+            <probability> <!-- P(1 | 1) -->
+                <given>
+                    <fact>
+                        <parent>febra</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                </given>
+                <outcome>true</outcome>
+                <value>0.6</value>
+            </probability>
+        </table>
+    </node>
+
+    <node>
+        <name>anorexie</name>
+        <outcome>false</outcome>
+        <outcome>true</outcome>
+
+        <table>
+            <probability> <!-- P(0 | 0) -->
+                <given>
+                    <fact>
+                        <parent>febra</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                </given>
+                <outcome>false</outcome>
+                <value>0.9</value>
+            </probability>
+
+            <probability> <!-- P(0 | 1) -->
+                <given>
+                    <fact>
+                        <parent>febra</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                </given>
+                <outcome>false</outcome>
+                <value>0.5</value>
+            </probability>
+
+            <probability> <!-- P(1 | 0) -->
+                <given>
+                    <fact>
+                        <parent>febra</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                </given>
+                <outcome>true</outcome>
+                <value>0.1</value>
+            </probability>
+
+            <probability> <!-- P(1 | 1) -->
+                <given>
+                    <fact>
+                        <parent>febra</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                </given>
+                <outcome>true</outcome>
+                <value>0.5</value>
+            </probability>
+        </table>
+    </node>
+</net>
+
+<!--
+<probability>
+    <given></given>
+    <outcome></outcome>
+        <value></value>
+</probability>
+
+
+<probability>
+    
+    <given></given>
+    <outcome>false</outcome>
+    <value></value>
+</probability>
+
+<probability>
+    <given></given>
+    <outcome>true</outcome>
+    <value></value>
+</probability>
+-->
