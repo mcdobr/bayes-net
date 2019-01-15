@@ -48,17 +48,26 @@ namespace UserInterface
             {
                 evidence.Add( new Fact(i, "true", network));
             }
-            List<string> list_node = new List<string> {"cold","lung cancer","flu","pneumonia","asthma" };
-            
+            List<string> list_node = new List<string> {"cold", "lung cancer", "flu", "pneumonia", "asthma" };
+
+
+            Dictionary<string, double> answers_strings = new Dictionary<string, double>();
             List<string> list_answer = new List<string>();
             foreach (string i in list_node)
             {
                 Node disease = network.Nodes[i];
                 Query question = new Query(disease, "true", evidence);
-                list_answer.Add(string.Format("{0} %   => {1}",Math.Round( network.answer(question)*100, 2, MidpointRounding.AwayFromZero), disease.ToString()));
+
+                double prob_in_percentage = Math.Round(network.answer(question) * 100, 4, MidpointRounding.AwayFromZero);
+                string output_str = string.Format("Probability of having {0} = {1} %", disease.Name, prob_in_percentage);
+                
+                answers_strings[output_str] = prob_in_percentage;
             }
-            sortare(list_answer);
-            afisare(list_answer);
+
+            foreach (var ordered_kvp in answers_strings.OrderBy(kvp => -kvp.Value))
+            {
+                Afisare.Items.Add(ordered_kvp.Key);
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)

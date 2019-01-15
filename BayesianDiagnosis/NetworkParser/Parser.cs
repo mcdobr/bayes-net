@@ -35,7 +35,12 @@ namespace NetworkParser
             foreach (XmlNode node in nodeList)
             {
                 string name = node.SelectSingleNode("name").InnerText;
-                network.addNode(name);
+                var outcomes = node.SelectNodes("outcome").Cast<XmlNode>()
+                                    .Select(outcomeNode => outcomeNode.InnerText)
+                                    .ToList();
+
+
+                network.addNode(name, outcomes);
 
                 XmlNodeList probabilityList = node.SelectNodes("table/probability");
                 foreach (XmlNode p in probabilityList)

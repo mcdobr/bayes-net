@@ -117,7 +117,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(96, 23);
             this.button1.TabIndex = 8;
-            this.button1.Text = "Verifica";
+            this.button1.Text = "Diagnose";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -145,7 +145,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(817, 261);
+            this.ClientSize = new System.Drawing.Size(523, 264);
             this.Controls.Add(this.checkedListBox4);
             this.Controls.Add(this.Afisare);
             this.Controls.Add(this.button1);
