@@ -1,0 +1,277 @@
+﻿<net>
+    <node>
+        <name>Burglary</name>
+        <outcome>false</outcome>
+        <outcome>true</outcome>
+
+        <parents></parents>
+        
+        <table>
+            <probability>
+                <given></given>
+                <outcome>false</outcome>
+                <value>0.999</value>
+            </probability>
+            <probability>
+                <given></given>
+                <outcome>true</outcome>
+                <value>0.001</value>
+            </probability>
+        </table>
+    </node>
+
+    <node>
+        <name>Earthquake</name>
+        <outcome>false</outcome>
+        <outcome>true</outcome>
+        <parents></parents>
+
+        <table>
+            <probability>
+                <given></given>
+                <outcome>false</outcome>
+                <value>0.998</value>
+            </probability>
+            <probability>
+                <given></given>
+                <outcome>true</outcome>
+                <value>0.002</value>
+            </probability>
+        </table>
+    </node>
+
+    <node>
+        <name>Alarm</name>
+        <outcome>false</outcome>
+        <outcome>true</outcome>
+        <parents>Burglary,Earthquake</parents>
+
+        <table>
+            <probability>
+                <given>
+                    <fact>
+                        <parent>Burglary</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                    <fact>
+                        <parent>Earthquake</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                </given>
+                <outcome>false</outcome>
+                <value>0.999</value>
+            </probability>
+
+            <probability>
+                <given>
+                    <fact>
+                        <parent>Burglary</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                    <fact>
+                        <parent>Earthquake</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                </given>
+                <outcome>false</outcome>
+                <value>0.71</value>
+            </probability>
+
+            <probability>
+                <given>
+                    <fact>
+                        <parent>Burglary</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                    <fact>
+                        <parent>Earthquake</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                </given>
+                <outcome>false</outcome>
+                <value>0.06</value>
+            </probability>
+
+            <probability>
+                <given>
+                    <fact>
+                        <parent>Burglary</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                    <fact>
+                        <parent>Earthquake</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                </given>
+                <outcome>false</outcome>
+                <value>0.05</value>
+            </probability>
+
+            <probability>
+                <given>
+                    <fact>
+                        <parent>Burglary</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                    <fact>
+                        <parent>Earthquake</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                </given>
+                <outcome>true</outcome>
+                <value>0.001</value>
+            </probability>
+
+            <probability>
+                <given>
+                    <fact>
+                        <parent>Burglary</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                    <fact>
+                        <parent>Earthquake</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                </given>
+                <outcome>true</outcome>
+                <value>0.29</value>
+            </probability>
+
+            <probability>
+                <given>
+                    <fact>
+                        <parent>Burglary</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                    <fact>
+                        <parent>Earthquake</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                </given>
+                <outcome>true</outcome>
+                <value>0.94</value>
+            </probability>
+
+            <probability>
+                <given>
+                    <fact>
+                        <parent>Burglary</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                    <fact>
+                        <parent>Earthquake</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                </given>
+                <outcome>true</outcome>
+                <value>0.95</value>
+            </probability>
+        </table>
+    </node>
+
+    <node>
+        <name>John calls</name>
+        <outcome>false</outcome>
+        <outcome>true</outcome>
+        <parents>Alarm</parents>
+
+        <table>
+            <probability>
+                <given>
+                    <fact>
+                        <parent>Alarm</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                </given>
+                <outcome>false</outcome>
+                <value>0.95</value>
+            </probability>
+
+            <probability>
+                <given>
+                    <fact>
+                        <parent>Alarm</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                </given>
+                <outcome>false</outcome>
+                <value>0.1</value>
+            </probability>
+
+            <probability>
+                <given>
+                    <fact>
+                        <parent>Alarm</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                </given>
+                <outcome>true</outcome>
+                <value>0.05</value>
+            </probability>
+
+            <probability>
+                <given>
+                    <fact>
+                        <parent>Alarm</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                </given>
+                <outcome>true</outcome>
+                <value>0.9</value>
+            </probability>
+        </table>
+    </node>
+
+    <node>
+        <name>Mary calls</name>
+        <outcome>false</outcome>
+        <outcome>true</outcome>
+        <parents>Alarm</parents>
+
+        <table>
+            <probability>
+                <given>
+                    <fact>
+                        <parent>Alarm</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                </given>
+                <outcome>false</outcome>
+                <value>0.99</value>
+            </probability>
+
+            <probability>
+                <given>
+                    <fact>
+                        <parent>Alarm</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                </given>
+                <outcome>false</outcome>
+                <value>0.13</value>
+            </probability>
+
+            <probability>
+                <given>
+                    <fact>
+                        <parent>Alarm</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                </given>
+                <outcome>true</outcome>
+                <value>0.01</value>
+            </probability>
+
+            <probability>
+                <given>
+                    <fact>
+                        <parent>Alarm</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                </given>
+                <outcome>true</outcome>
+                <value>0.7</value>
+            </probability>
+        </table>
+    </node>
+</net>

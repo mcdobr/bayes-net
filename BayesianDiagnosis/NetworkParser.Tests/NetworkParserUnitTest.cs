@@ -12,7 +12,7 @@ namespace BayesianNetwork.Tests
     public class NetworkParserUnitTest
     {
         static string path = "simpleDiseases.xml";
-        static Network mockNetwork = Parser.parse(path);
+        static Network mockNetwork = NetworkParser.Parser.parse(path);
 
         [TestMethod]
         public void TestHasAllNodes()

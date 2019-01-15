@@ -15,12 +15,14 @@ namespace BayesianNetwork
 
         public Network()
         {
-            nodes = new Dictionary<string, Node>();
+            nodes = new Dictionary<string, Node>(StringComparer.OrdinalIgnoreCase);
         }
 
         public Network addNode(string _name, IEnumerable<string> _domainValues)
         {
-            nodes.Add(_name, new Node(_name, _domainValues.Select(str => str.Trim().ToLower()), this));
+            _name = _name.Trim().ToLower();
+            _domainValues = _domainValues.Select(str => str.Trim().ToLower());
+            nodes.Add(_name, new Node(_name, _domainValues, this));
             return this;
         }
 
@@ -65,6 +67,8 @@ namespace BayesianNetwork
 
         public Node getNodeByName(string nodeName)
         {
+            nodeName = nodeName.Trim().ToLower();
+
             Node requestedNode;
             bool found = nodes.TryGetValue(nodeName, out requestedNode);
             if (found)
