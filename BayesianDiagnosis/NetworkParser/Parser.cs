@@ -10,31 +10,35 @@ using BayesianNetwork;
 
 namespace NetworkParser
 {
-    public class NetworkCreate
+    public class Parser
     {
-        static Network network;
-
-        string path = "C:\\Users\\Iulius\\Desktop\\bayes-net-master\\BayesianDiagnosis\\network.xml";
-
-        public Network startParsing()
+        static public Network parse(string path)
         {
             XmlDocument doc = new XmlDocument();
-            network = new Network();
 
             if (File.Exists(path))
+            {
                 doc.Load(path);
+                return parse(doc);
+            }
             else
-                return network;
+            {
+                return new Network();
+            }
+        }
 
-            XmlNodeList nodeList = doc.DocumentElement.SelectNodes("/net/node");
+        static public Network parse(XmlDocument xmlDocument)
+        {
+            Network network = new Network();
+            XmlNodeList nodeList = xmlDocument.DocumentElement.SelectNodes("/net/node");
 
             foreach (XmlNode node in nodeList)
             {
                 string name = node.SelectSingleNode("name").InnerText;
                 network.addNode(name);
-                
-                XmlNodeList probabiliyList = node.SelectNodes("table/probability");
-                foreach (XmlNode p in probabiliyList)
+
+                XmlNodeList probabilityList = node.SelectNodes("table/probability");
+                foreach (XmlNode p in probabilityList)
                 {
                     var given = p.SelectSingleNode("given");
 

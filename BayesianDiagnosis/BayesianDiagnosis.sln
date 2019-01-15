@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserInterface", "UserInterface\UserInterface.csproj", "{B1CE1948-2646-48A0-B815-2C9EFD9CF62D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BayesianNetwork", "BayesianNetwork\BayesianNetwork.csproj", "{9B6108A0-1D3C-4B04-AA12-80F00446CCB5}"
@@ -9,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BayesianNetwork.Tests", "Ba
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetworkParser", "NetworkParser\NetworkParser.csproj", "{55C4DCC3-F1B1-472C-9147-5BF53E08E34E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parser.Tests", "Parser.Tests\Parser.Tests.csproj", "{7E6DCF98-8C9F-43A8-AFAF-66AE36EE193B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetworkParser.Tests", "NetworkParser.Tests\NetworkParser.Tests.csproj", "{7E6DCF98-8C9F-43A8-AFAF-66AE36EE193B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
