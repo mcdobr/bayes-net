@@ -18,7 +18,7 @@ namespace BayesianNetwork
         public Query(Node _target, string _value, IEnumerable<Fact> _facts)
         {
             target = _target;
-            value = _value;
+            value = _value.Trim().ToLower();
             facts = new HashSet<Fact>(_facts);
         }
 

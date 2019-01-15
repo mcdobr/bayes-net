@@ -20,7 +20,7 @@ namespace BayesianNetwork
 
         public Network addNode(string _name, IEnumerable<string> _domainValues)
         {
-            nodes.Add(_name, new Node(_name, _domainValues, this));
+            nodes.Add(_name, new Node(_name, _domainValues.Select(str => str.Trim().ToLower()), this));
             return this;
         }
 

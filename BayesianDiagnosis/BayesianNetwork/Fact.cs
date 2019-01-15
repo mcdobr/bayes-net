@@ -17,7 +17,7 @@ namespace BayesianNetwork
         public Fact(Node _node, string _value)
         {
             node = _node;
-            value = _value;
+            value = _value.Trim().ToLower();
         }
 
         public override bool Equals(object obj)
