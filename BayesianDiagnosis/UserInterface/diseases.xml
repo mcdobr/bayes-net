@@ -26,29 +26,7 @@
             </probability>
         </table>
     </node>
-
-    <node>
-        <name>sex</name>
-        <outcome>m</outcome>
-        <outcome>f</outcome>
-		<parents></parents>
-        
-		<table>
-            <probability>
-                <!-- Nu are părinți -->
-                <given></given>
-                <outcome>m</outcome>
-                <value>0.5</value>
-            </probability>
-
-            <probability>
-                <!-- Nu are părinți -->
-                <given></given>
-                <outcome>f</outcome>
-                <value>0.5</value>
-            </probability>
-        </table>
-    </node>
+	
 	<node>
         <name>age</name>
         <outcome>child</outcome>
@@ -78,7 +56,30 @@
             </probability>
         </table>
     </node>
+	
+    <node>
+        <name>sex</name>
+        <outcome>m</outcome>
+        <outcome>f</outcome>
+		<parents></parents>
+        
+		<table>
+            <probability>
+                <!-- Nu are părinți -->
+                <given></given>
+                <outcome>m</outcome>
+                <value>0.5</value>
+            </probability>
 
+            <probability>
+                <!-- Nu are părinți -->
+                <given></given>
+                <outcome>f</outcome>
+                <value>0.5</value>
+            </probability>
+        </table>
+    </node>
+	
     <node>
         <name>cold</name>
         <outcome>false</outcome>
@@ -258,6 +259,7 @@
             </probability>
 		</table>
     </node>
+
 	<node>
         <name>flu</name>
         <outcome>false</outcome>
@@ -330,6 +332,7 @@
             </probability>
         </table>
     </node>
+
 	<node>
         <name>pneumonia</name>
         <outcome>false</outcome>
@@ -511,7 +514,187 @@
     </node>
 	
 	<node>
-        <name>astm</name>
+        <name>lung cancer</name> 
+        <outcome>false</outcome>
+        <outcome>true</outcome>
+		
+		<parents>smoker,age</parents>
+
+        <table>
+            <!-- Probabilitatile ca lung cancer sa fie fals în ordine crescător binară -->
+            <probability> 
+                <given>
+                    <fact>
+                        <parent>smoker</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                    <fact>
+                        <parent>age</parent>
+                        <outcome>child</outcome>
+                    </fact>
+                </given>
+                <outcome>false</outcome>
+                <value>1</value>
+            </probability>
+			<probability> 
+                <given>
+                    <fact>
+                        <parent>smoker</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                    <fact>
+                        <parent>age</parent>
+                        <outcome>adult</outcome>
+                    </fact>
+                </given>
+                <outcome>false</outcome>
+                <value>0.99975</value>
+            </probability>
+			<probability> 
+                <given>
+                    <fact>
+                        <parent>smoker</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                    <fact>
+                        <parent>age</parent>
+                        <outcome>elder</outcome>
+                    </fact>
+                </given>
+                <outcome>false</outcome>
+                <value>0.9943</value>
+            </probability>
+			<probability> 
+                <given>
+                    <fact>
+                        <parent>smoker</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                    <fact>
+                        <parent>age</parent>
+                        <outcome>child</outcome>
+                    </fact>
+                </given>
+                <outcome>false</outcome>
+                <value>1</value>
+            </probability>
+			<probability> 
+                <given>
+                    <fact>
+                        <parent>smoker</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                    <fact>
+                        <parent>age</parent>
+                        <outcome>adult</outcome>
+                    </fact>
+                </given>
+                <outcome>false</outcome>
+                <value>0.99967</value>
+            </probability>
+			<probability> 
+                <given>
+                    <fact>
+                        <parent>smoker</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                    <fact>
+                        <parent>age</parent>
+                        <outcome>elder</outcome>
+                    </fact>
+                </given>
+                <outcome>false</outcome>
+                <value>0.993</value>
+            </probability>
+			<probability> 
+                <given>
+                    <fact>
+                        <parent>smoker</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                    <fact>
+                        <parent>age</parent>
+                        <outcome>child</outcome>
+                    </fact>
+                </given>
+                <outcome>true</outcome>
+                <value>0</value>
+            </probability>
+			<probability> 
+                <given>
+                    <fact>
+                        <parent>smoker</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                    <fact>
+                        <parent>age</parent>
+                        <outcome>adult</outcome>
+                    </fact>
+                </given>
+                <outcome>true</outcome>
+                <value>0.00025</value>
+            </probability>
+			<probability> 
+                <given>
+                    <fact>
+                        <parent>smoker</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                    <fact>
+                        <parent>age</parent>
+                        <outcome>elder</outcome>
+                    </fact>
+                </given>
+                <outcome>true</outcome>
+                <value>0.0057</value>
+            </probability>
+			<probability> 
+                <given>
+                    <fact>
+                        <parent>smoker</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                    <fact>
+                        <parent>age</parent>
+                        <outcome>child</outcome>
+                    </fact>
+                </given>
+                <outcome>true</outcome>
+                <value>0</value>
+            </probability>
+			<probability> 
+                <given>
+                    <fact>
+                        <parent>smoker</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                    <fact>
+                        <parent>age</parent>
+                        <outcome>adult</outcome>
+                    </fact>
+                </given>
+                <outcome>true</outcome>
+                <value>0.00033</value>
+            </probability>
+			<probability> 
+                <given>
+                    <fact>
+                        <parent>smoker</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                    <fact>
+                        <parent>age</parent>
+                        <outcome>elder</outcome>
+                    </fact>
+                </given>
+                <outcome>true</outcome>
+                <value>0.007</value>
+            </probability>
+		</table>
+    </node>
+	
+	<node>
+        <name>asthma</name>
         <outcome>false</outcome>
         <outcome>true</outcome>
 		<parents>sex</parents>
@@ -686,311 +869,7 @@
             </probability>
         </table>
     </node>
-	<node>
-        <name>weight loss</name>
-        <outcome>false</outcome>
-        <outcome>true</outcome>
 
-		<parents>pneumonia,cancer</parents>
-
-        <table>
-            <probability> <!-- P(0 | 00) -->
-                <given>
-                    <fact>
-                        <parent>pneumonia</parent>
-                        <outcome>false</outcome>
-                    </fact>
-                    <fact>
-                        <parent>cancer</parent>
-                        <outcome>false</outcome>
-                    </fact>
-                </given>
-                <outcome>false</outcome>
-                <value>0.96</value>
-            </probability>
-			
-			<probability> <!-- P(0 | 01) -->
-                <given>
-                    <fact>
-                        <parent>pneumonia</parent>
-                        <outcome>false</outcome>
-                    </fact>
-                    <fact>
-                        <parent>cancer</parent>
-                        <outcome>true</outcome>
-                    </fact>
-                </given>
-                <outcome>false</outcome>
-                <value>0.3</value>
-            </probability>
-			<probability> <!-- P(0 | 10) -->
-                <given>
-                    <fact>
-                        <parent>pneumonia</parent>
-                        <outcome>true</outcome>
-                    </fact>
-                    <fact>
-                        <parent>cancer</parent>
-                        <outcome>false</outcome>
-                    </fact>
-                </given>
-                <outcome>false</outcome>
-                <value>0.6</value>
-            </probability>
-			<probability> <!-- P(0 | 11) -->
-                <given>
-                    <fact>
-                        <parent>pneumonia</parent>
-                        <outcome>true</outcome>
-                    </fact>
-                    <fact>
-                        <parent>cancer</parent>
-                        <outcome>true</outcome>
-                    </fact>
-                </given>
-                <outcome>false</outcome>
-                <value>0.04</value>
-            </probability>
-			<probability> <!-- P(1 | 00) -->
-                <given>
-                    <fact>
-                        <parent>pneumonia</parent>
-                        <outcome>false</outcome>
-                    </fact>
-                    <fact>
-                        <parent>cancer</parent>
-                        <outcome>false</outcome>
-                    </fact>
-                </given>
-                <outcome>true</outcome>
-                <value>0.04</value>
-            </probability>
-			
-			<probability> <!-- P(1 | 01) -->
-                <given>
-                    <fact>
-                        <parent>pneumonia</parent>
-                        <outcome>false</outcome>
-                    </fact>
-                    <fact>
-                        <parent>cancer</parent>
-                        <outcome>true</outcome>
-                    </fact>
-                </given>
-                <outcome>true</outcome>
-                <value>0.7</value>
-            </probability>
-			<probability> <!-- P(1 | 10) -->
-                <given>
-                    <fact>
-                        <parent>pneumonia</parent>
-                        <outcome>true</outcome>
-                    </fact>
-                    <fact>
-                        <parent>cancer</parent>
-                        <outcome>false</outcome>
-                    </fact>
-                </given>
-                <outcome>true</outcome>
-                <value>0.4</value>
-            </probability>
-			<probability> <!-- P(1 | 11) -->
-                <given>
-                    <fact>
-                        <parent>pneumonia</parent>
-                        <outcome>true</outcome>
-                    </fact>
-                    <fact>
-                        <parent>cancer</parent>
-                        <outcome>true</outcome>
-                    </fact>
-                </given>
-                <outcome>true</outcome>
-                <value>0.96</value>
-            </probability>
-        </table>
-    </node>
-	
-	<node>
-        <name>cancer</name> 
-        <outcome>false</outcome>
-        <outcome>true</outcome>
-		
-		<parents>smoker,age</parents>
-
-        <table>
-            <!-- Probabilitatile ca cancer sa fie fals în ordine crescător binară -->
-            <probability> 
-                <given>
-                    <fact>
-                        <parent>smoker</parent>
-                        <outcome>false</outcome>
-                    </fact>
-                    <fact>
-                        <parent>age</parent>
-                        <outcome>child</outcome>
-                    </fact>
-                </given>
-                <outcome>false</outcome>
-                <value>1</value>
-            </probability>
-			<probability> 
-                <given>
-                    <fact>
-                        <parent>smoker</parent>
-                        <outcome>false</outcome>
-                    </fact>
-                    <fact>
-                        <parent>age</parent>
-                        <outcome>adult</outcome>
-                    </fact>
-                </given>
-                <outcome>false</outcome>
-                <value>0.99975</value>
-            </probability>
-			<probability> 
-                <given>
-                    <fact>
-                        <parent>smoker</parent>
-                        <outcome>false</outcome>
-                    </fact>
-                    <fact>
-                        <parent>age</parent>
-                        <outcome>elder</outcome>
-                    </fact>
-                </given>
-                <outcome>false</outcome>
-                <value>0.9943</value>
-            </probability>
-			<probability> 
-                <given>
-                    <fact>
-                        <parent>smoker</parent>
-                        <outcome>true</outcome>
-                    </fact>
-                    <fact>
-                        <parent>age</parent>
-                        <outcome>child</outcome>
-                    </fact>
-                </given>
-                <outcome>false</outcome>
-                <value>1</value>
-            </probability>
-			<probability> 
-                <given>
-                    <fact>
-                        <parent>smoker</parent>
-                        <outcome>true</outcome>
-                    </fact>
-                    <fact>
-                        <parent>age</parent>
-                        <outcome>adult</outcome>
-                    </fact>
-                </given>
-                <outcome>false</outcome>
-                <value>0.99967</value>
-            </probability>
-			<probability> 
-                <given>
-                    <fact>
-                        <parent>smoker</parent>
-                        <outcome>true</outcome>
-                    </fact>
-                    <fact>
-                        <parent>age</parent>
-                        <outcome>elder</outcome>
-                    </fact>
-                </given>
-                <outcome>false</outcome>
-                <value>0.993</value>
-            </probability>
-			<probability> 
-                <given>
-                    <fact>
-                        <parent>smoker</parent>
-                        <outcome>false</outcome>
-                    </fact>
-                    <fact>
-                        <parent>age</parent>
-                        <outcome>child</outcome>
-                    </fact>
-                </given>
-                <outcome>true</outcome>
-                <value>0</value>
-            </probability>
-			<probability> 
-                <given>
-                    <fact>
-                        <parent>smoker</parent>
-                        <outcome>false</outcome>
-                    </fact>
-                    <fact>
-                        <parent>age</parent>
-                        <outcome>adult</outcome>
-                    </fact>
-                </given>
-                <outcome>true</outcome>
-                <value>0.00025</value>
-            </probability>
-			<probability> 
-                <given>
-                    <fact>
-                        <parent>smoker</parent>
-                        <outcome>false</outcome>
-                    </fact>
-                    <fact>
-                        <parent>age</parent>
-                        <outcome>elder</outcome>
-                    </fact>
-                </given>
-                <outcome>true</outcome>
-                <value>0.0057</value>
-            </probability>
-			<probability> 
-                <given>
-                    <fact>
-                        <parent>smoker</parent>
-                        <outcome>true</outcome>
-                    </fact>
-                    <fact>
-                        <parent>age</parent>
-                        <outcome>child</outcome>
-                    </fact>
-                </given>
-                <outcome>true</outcome>
-                <value>0</value>
-            </probability>
-			<probability> 
-                <given>
-                    <fact>
-                        <parent>smoker</parent>
-                        <outcome>true</outcome>
-                    </fact>
-                    <fact>
-                        <parent>age</parent>
-                        <outcome>adult</outcome>
-                    </fact>
-                </given>
-                <outcome>true</outcome>
-                <value>0.00033</value>
-            </probability>
-			<probability> 
-                <given>
-                    <fact>
-                        <parent>smoker</parent>
-                        <outcome>true</outcome>
-                    </fact>
-                    <fact>
-                        <parent>age</parent>
-                        <outcome>elder</outcome>
-                    </fact>
-                </given>
-                <outcome>true</outcome>
-                <value>0.007</value>
-            </probability>
-		</table>
-    </node>
-	
 	<node>
         <name>fever</name>
         <outcome>false</outcome>
@@ -1289,12 +1168,138 @@
             </probability>
 		</table>
 	</node>
+	
 	<node>
-        <name>fever</name>
+        <name>weight loss</name>
         <outcome>false</outcome>
         <outcome>true</outcome>
 
-		<parents>pneumonia,cancer,astm</parents>
+		<parents>pneumonia,lung cancer</parents>
+
+        <table>
+            <probability> <!-- P(0 | 00) -->
+                <given>
+                    <fact>
+                        <parent>pneumonia</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                    <fact>
+                        <parent>lung cancer</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                </given>
+                <outcome>false</outcome>
+                <value>0.96</value>
+            </probability>
+			
+			<probability> <!-- P(0 | 01) -->
+                <given>
+                    <fact>
+                        <parent>pneumonia</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                    <fact>
+                        <parent>lung cancer</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                </given>
+                <outcome>false</outcome>
+                <value>0.3</value>
+            </probability>
+			<probability> <!-- P(0 | 10) -->
+                <given>
+                    <fact>
+                        <parent>pneumonia</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                    <fact>
+                        <parent>lung cancer</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                </given>
+                <outcome>false</outcome>
+                <value>0.6</value>
+            </probability>
+			<probability> <!-- P(0 | 11) -->
+                <given>
+                    <fact>
+                        <parent>pneumonia</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                    <fact>
+                        <parent>lung cancer</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                </given>
+                <outcome>false</outcome>
+                <value>0.04</value>
+            </probability>
+			<probability> <!-- P(1 | 00) -->
+                <given>
+                    <fact>
+                        <parent>pneumonia</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                    <fact>
+                        <parent>lung cancer</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                </given>
+                <outcome>true</outcome>
+                <value>0.04</value>
+            </probability>
+			
+			<probability> <!-- P(1 | 01) -->
+                <given>
+                    <fact>
+                        <parent>pneumonia</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                    <fact>
+                        <parent>lung cancer</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                </given>
+                <outcome>true</outcome>
+                <value>0.7</value>
+            </probability>
+			<probability> <!-- P(1 | 10) -->
+                <given>
+                    <fact>
+                        <parent>pneumonia</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                    <fact>
+                        <parent>lung cancer</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                </given>
+                <outcome>true</outcome>
+                <value>0.4</value>
+            </probability>
+			<probability> <!-- P(1 | 11) -->
+                <given>
+                    <fact>
+                        <parent>pneumonia</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                    <fact>
+                        <parent>lung cancer</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                </given>
+                <outcome>true</outcome>
+                <value>0.96</value>
+            </probability>
+        </table>
+    </node>
+	
+	<node>
+        <name>chest pain</name>
+        <outcome>false</outcome>
+        <outcome>true</outcome>
+
+		<parents>pneumonia,lung cancer,asthma</parents>
 
         <table>
             <probability> <!-- P(0 | 000) -->
@@ -1304,11 +1309,11 @@
                         <outcome>false</outcome>
                     </fact>
 				    <fact>
-                        <parent>cancer</parent>
+                        <parent>lung cancer</parent>
                         <outcome>false</outcome>
                     </fact>
                     <fact>
-                        <parent>astm</parent>
+                        <parent>asthma</parent>
                         <outcome>false</outcome>
                     </fact>
                 </given>
@@ -1322,11 +1327,11 @@
                         <outcome>false</outcome>
                     </fact>
 				    <fact>
-                        <parent>cancer</parent>
+                        <parent>lung cancer</parent>
                         <outcome>false</outcome>
                     </fact>
                     <fact>
-                        <parent>astm</parent>
+                        <parent>asthma</parent>
                         <outcome>true</outcome>
                     </fact>
                 </given>
@@ -1340,11 +1345,11 @@
                         <outcome>false</outcome>
                     </fact>
 				    <fact>
-                        <parent>cancer</parent>
+                        <parent>lung cancer</parent>
                         <outcome>true</outcome>
                     </fact>
                     <fact>
-                        <parent>astm</parent>
+                        <parent>asthma</parent>
                         <outcome>false</outcome>
                     </fact>
                 </given>
@@ -1358,11 +1363,11 @@
                         <outcome>false</outcome>
                     </fact>
 				    <fact>
-                        <parent>cancer</parent>
+                        <parent>lung cancer</parent>
                         <outcome>true</outcome>
                     </fact>
                     <fact>
-                        <parent>astm</parent>
+                        <parent>asthma</parent>
                         <outcome>true</outcome>
                     </fact>
                 </given>
@@ -1376,11 +1381,11 @@
                         <outcome>true</outcome>
                     </fact>
 				    <fact>
-                        <parent>cancer</parent>
+                        <parent>lung cancer</parent>
                         <outcome>false</outcome>
                     </fact>
                     <fact>
-                        <parent>astm</parent>
+                        <parent>asthma</parent>
                         <outcome>false</outcome>
                     </fact>
                 </given>
@@ -1394,11 +1399,11 @@
                         <outcome>true</outcome>
                     </fact>
 				    <fact>
-                        <parent>cancer</parent>
+                        <parent>lung cancer</parent>
                         <outcome>false</outcome>
                     </fact>
                     <fact>
-                        <parent>astm</parent>
+                        <parent>asthma</parent>
                         <outcome>true</outcome>
                     </fact>
                 </given>
@@ -1412,11 +1417,11 @@
                         <outcome>true</outcome>
                     </fact>
 				    <fact>
-                        <parent>cancer</parent>
+                        <parent>lung cancer</parent>
                         <outcome>true</outcome>
                     </fact>
                     <fact>
-                        <parent>astm</parent>
+                        <parent>asthma</parent>
                         <outcome>false</outcome>
                     </fact>
                 </given>
@@ -1430,11 +1435,11 @@
                         <outcome>true</outcome>
                     </fact>
 				    <fact>
-                        <parent>cancer</parent>
+                        <parent>lung cancer</parent>
                         <outcome>true</outcome>
                     </fact>
                     <fact>
-                        <parent>astm</parent>
+                        <parent>asthma</parent>
                         <outcome>true</outcome>
                     </fact>
                 </given>
@@ -1448,11 +1453,11 @@
                         <outcome>false</outcome>
                     </fact>
 				    <fact>
-                        <parent>cancer</parent>
+                        <parent>lung cancer</parent>
                         <outcome>false</outcome>
                     </fact>
                     <fact>
-                        <parent>astm</parent>
+                        <parent>asthma</parent>
                         <outcome>false</outcome>
                     </fact>
                 </given>
@@ -1466,11 +1471,11 @@
                         <outcome>false</outcome>
                     </fact>
 				    <fact>
-                        <parent>cancer</parent>
+                        <parent>lung cancer</parent>
                         <outcome>false</outcome>
                     </fact>
                     <fact>
-                        <parent>astm</parent>
+                        <parent>asthma</parent>
                         <outcome>true</outcome>
                     </fact>
                 </given>
@@ -1484,11 +1489,11 @@
                         <outcome>false</outcome>
                     </fact>
 				    <fact>
-                        <parent>cancer</parent>
+                        <parent>lung cancer</parent>
                         <outcome>true</outcome>
                     </fact>
                     <fact>
-                        <parent>astm</parent>
+                        <parent>asthma</parent>
                         <outcome>false</outcome>
                     </fact>
                 </given>
@@ -1502,11 +1507,11 @@
                         <outcome>false</outcome>
                     </fact>
 				    <fact>
-                        <parent>cancer</parent>
+                        <parent>lung cancer</parent>
                         <outcome>true</outcome>
                     </fact>
                     <fact>
-                        <parent>astm</parent>
+                        <parent>asthma</parent>
                         <outcome>true</outcome>
                     </fact>
                 </given>
@@ -1520,11 +1525,11 @@
                         <outcome>true</outcome>
                     </fact>
 				    <fact>
-                        <parent>cancer</parent>
+                        <parent>lung cancer</parent>
                         <outcome>false</outcome>
                     </fact>
                     <fact>
-                        <parent>astm</parent>
+                        <parent>asthma</parent>
                         <outcome>false</outcome>
                     </fact>
                 </given>
@@ -1538,11 +1543,11 @@
                         <outcome>true</outcome>
                     </fact>
 				    <fact>
-                        <parent>cancer</parent>
+                        <parent>lung cancer</parent>
                         <outcome>false</outcome>
                     </fact>
                     <fact>
-                        <parent>astm</parent>
+                        <parent>asthma</parent>
                         <outcome>true</outcome>
                     </fact>
                 </given>
@@ -1556,11 +1561,11 @@
                         <outcome>true</outcome>
                     </fact>
 				    <fact>
-                        <parent>cancer</parent>
+                        <parent>lung cancer</parent>
                         <outcome>true</outcome>
                     </fact>
                     <fact>
-                        <parent>astm</parent>
+                        <parent>asthma</parent>
                         <outcome>false</outcome>
                     </fact>
                 </given>
@@ -1574,11 +1579,11 @@
                         <outcome>true</outcome>
                     </fact>
 				    <fact>
-                        <parent>cancer</parent>
+                        <parent>lung cancer</parent>
                         <outcome>true</outcome>
                     </fact>
                     <fact>
-                        <parent>astm</parent>
+                        <parent>asthma</parent>
                         <outcome>true</outcome>
                     </fact>
                 </given>
@@ -1588,26 +1593,4 @@
 			
 		</table>
 	</node>
-
 </net>
-<!--
-<probability>
-    <given></given>
-    <outcome></outcome>
-        <value></value>
-</probability>
-
-
-<probability>
-    
-    <given></given>
-    <outcome>false</outcome>
-    <value></value>
-</probability>
-
-<probability>
-    <given></given>
-    <outcome>true</outcome>
-    <value></value>
-</probability>
--->

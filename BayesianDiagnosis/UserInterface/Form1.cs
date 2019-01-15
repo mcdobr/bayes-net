@@ -14,19 +14,19 @@ namespace UserInterface
 {
     public partial class Form1 : Form
     {
+        static Network network = Parser.parse("disease.xml");
+        
         public Form1()
         {
             InitializeComponent();
         }
-        static NetworkCreate create = new NetworkCreate();
-        static Network mockNetwork = create.startParsing();
-
 
         void sortare(List<string> list)
         {
             list.Sort();
             list.Reverse();
         }
+
         void afisare(List<string> list)
         {
             foreach (string i in list)
@@ -34,31 +34,33 @@ namespace UserInterface
                 Afisare.Items.Add(i);
             }
         }
+
         public void TestAskingInferentialQuestion(List<string> list)
         {
             List<Fact> evidence = new List<Fact>();
             int k = 0;
             foreach (string i in list)
             {
-                evidence.Add(new Fact(list[k].Split('|')[0], list[k].Split('|')[1], mockNetwork));
+                evidence.Add(new Fact(list[k].Split('|')[0], list[k].Split('|')[1], network));
                 k++;
             }
             foreach (string i in checkedListBox3.CheckedItems)
             {
-                evidence.Add( new Fact(i, "true", mockNetwork));
+                evidence.Add( new Fact(i, "true", network));
             }
-            List<string> list_node = new List<string> {"cold","lung cancer","flu","pneumonia","astm" };
+            List<string> list_node = new List<string> {"cold","lung cancer","flu","pneumonia","asthma" };
             
             List<string> list_answer = new List<string>();
             foreach (string i in list_node)
             {
-                Node disease = mockNetwork.Nodes[i];
+                Node disease = network.Nodes[i];
                 Query question = new Query(disease, "true", evidence);
-                list_answer.Add(string.Format("{0} => {1}", mockNetwork.answer(question), disease.ToString()));
+                list_answer.Add(string.Format("{0} => {1}", network.answer(question), disease.ToString()));
             }
             sortare(list_answer);
             afisare(list_answer);
         }
+
         private void button1_Click(object sender, EventArgs e)
         {
             Afisare.Items.Clear();
