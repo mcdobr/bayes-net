@@ -1,6 +1,6 @@
 <net>
     <node>
-        <name>gripa</name>
+        <name>smoker</name>
         <outcome>false</outcome>
         <outcome>true</outcome>
         
@@ -13,7 +13,7 @@
                 </given>
                 
                 <outcome>false</outcome>
-                <value>0.9</value>
+                <value>0.86</value>
             </probability>
 
             <probability>
@@ -22,276 +22,1574 @@
                 </given>
                 
                 <outcome>true</outcome>
-                <value>0.1</value>
+                <value>0.14</value>
             </probability>
         </table>
     </node>
 
     <node>
-        <name>abces</name>
-        <outcome>false</outcome>
-        <outcome>true</outcome>
+        <name>sex</name>
+        <outcome>m</outcome>
+        <outcome>f</outcome>
 		<parents></parents>
         
 		<table>
             <probability>
                 <!-- Nu are părinți -->
                 <given></given>
-                <outcome>false</outcome>
-                <value>0.95</value>
+                <outcome>m</outcome>
+                <value>0.5</value>
             </probability>
 
             <probability>
                 <!-- Nu are părinți -->
                 <given></given>
-                <outcome>true</outcome>
-                <value>0.05</value>
+                <outcome>f</outcome>
+                <value>0.5</value>
+            </probability>
+        </table>
+    </node>
+	<node>
+        <name>age</name>
+        <outcome>child</outcome>
+        <outcome>adult</outcome>
+		<outcome>elder</outcome>
+		<parents></parents>
+        
+		<table>
+            <probability>
+                <!-- Nu are părinți -->
+                <given></given>
+                <outcome>child</outcome>
+                <value>0.2544</value>
+            </probability>
+
+            <probability>
+                <!-- Nu are părinți -->
+                <given></given>
+                <outcome>adult</outcome>
+                <value>0.65</value>
+            </probability>
+			<probability>
+                <!-- Nu are părinți -->
+                <given></given>
+                <outcome>elder</outcome>
+                <value>0.087</value>
             </probability>
         </table>
     </node>
 
-
     <node>
-        <name>febra</name>
+        <name>cold</name>
         <outcome>false</outcome>
         <outcome>true</outcome>
 		
-		<parents>gripa,abces</parents>
+		<parents>smoker,age</parents>
 
         <table>
-            <!-- Probabilitatile ca febra sa fie fals în ordine crescător binară -->
-            <probability> <!-- P(0 | 00) -->
+            <!-- Probabilitatile ca cold sa fie fals în ordine crescător binară -->
+            <probability> 
                 <given>
                     <fact>
-                        <parent>gripa</parent>
+                        <parent>smoker</parent>
                         <outcome>false</outcome>
                     </fact>
                     <fact>
-                        <parent>abces</parent>
-                        <outcome>false</outcome>
+                        <parent>age</parent>
+                        <outcome>child</outcome>
                     </fact>
                 </given>
                 <outcome>false</outcome>
-                <value>0.95</value>
+                <value>0.83</value>
             </probability>
-
-            <probability> <!-- P(0 | 01) -->
+			<probability> 
                 <given>
                     <fact>
-                        <parent>gripa</parent>
+                        <parent>smoker</parent>
                         <outcome>false</outcome>
                     </fact>
                     <fact>
-                        <parent>abces</parent>
-                        <outcome>true</outcome>
+                        <parent>age</parent>
+                        <outcome>adult</outcome>
                     </fact>
                 </given>
                 <outcome>false</outcome>
-                <value>0.75</value>
+                <value>0.91</value>
             </probability>
-
-            <probability> <!-- P(0 | 10) -->
+			<probability> 
                 <given>
                     <fact>
-                        <parent>gripa</parent>
-                        <outcome>true</outcome>
+                        <parent>smoker</parent>
+                        <outcome>false</outcome>
                     </fact>
                     <fact>
-                        <parent>abces</parent>
-                        <outcome>false</outcome>
+                        <parent>age</parent>
+                        <outcome>elder</outcome>
                     </fact>
                 </given>
                 <outcome>false</outcome>
-                <value>0.3</value>
+                <value>0.89</value>
             </probability>
-
-            <probability> <!-- P(0 | 11) -->
+			<probability> 
                 <given>
                     <fact>
-                        <parent>gripa</parent>
+                        <parent>smoker</parent>
                         <outcome>true</outcome>
                     </fact>
                     <fact>
-                        <parent>abces</parent>
-                        <outcome>true</outcome>
+                        <parent>age</parent>
+                        <outcome>child</outcome>
                     </fact>
                 </given>
                 <outcome>false</outcome>
-                <value>0.2</value>
+                <value>0.78</value>
             </probability>
-
-            <!-- Probabilitatile ca febra sa fie adevarat în ordine crescător binară -->
-            <probability> <!-- P(1 | 00) -->
+			<probability> 
                 <given>
                     <fact>
-                        <parent>gripa</parent>
-                        <outcome>false</outcome>
-                    </fact>
-                    <fact>
-                        <parent>abces</parent>
-                        <outcome>false</outcome>
-                    </fact>
-                </given>
-                <outcome>true</outcome>
-                <value>0.05</value>
-            </probability>
-
-            <probability> <!-- P(1 | 01) -->
-                <given>
-                    <fact>
-                        <parent>gripa</parent>
-                        <outcome>false</outcome>
-                    </fact>
-                    <fact>
-                        <parent>abces</parent>
-                        <outcome>true</outcome>
-                    </fact>
-                </given>
-                <outcome>true</outcome>
-                <value>0.25</value>
-            </probability>
-
-            <probability> <!-- P(1 | 10) -->
-                <given>
-                    <fact>
-                        <parent>gripa</parent>
+                        <parent>smoker</parent>
                         <outcome>true</outcome>
                     </fact>
                     <fact>
-                        <parent>abces</parent>
-                        <outcome>false</outcome>
+                        <parent>age</parent>
+                        <outcome>adult</outcome>
                     </fact>
                 </given>
-                <outcome>true</outcome>
-                <value>0.7</value>
+                <outcome>false</outcome>
+                <value>0.89</value>
             </probability>
-
-            <probability> <!-- P(1 | 11) -->
+			<probability> 
                 <given>
                     <fact>
-                        <parent>gripa</parent>
+                        <parent>smoker</parent>
                         <outcome>true</outcome>
                     </fact>
                     <fact>
-                        <parent>abces</parent>
-                        <outcome>true</outcome>
+                        <parent>age</parent>
+                        <outcome>elder</outcome>
+                    </fact>
+                </given>
+                <outcome>false</outcome>
+                <value>0.87</value>
+            </probability>
+			<probability> 
+                <given>
+                    <fact>
+                        <parent>smoker</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                    <fact>
+                        <parent>age</parent>
+                        <outcome>child</outcome>
                     </fact>
                 </given>
                 <outcome>true</outcome>
-                <value>0.8</value>
+                <value>0.17</value>
             </probability>
-        </table>
+			<probability> 
+                <given>
+                    <fact>
+                        <parent>smoker</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                    <fact>
+                        <parent>age</parent>
+                        <outcome>adult</outcome>
+                    </fact>
+                </given>
+                <outcome>true</outcome>
+                <value>0.09</value>
+            </probability>
+			<probability> 
+                <given>
+                    <fact>
+                        <parent>smoker</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                    <fact>
+                        <parent>age</parent>
+                        <outcome>elder</outcome>
+                    </fact>
+                </given>
+                <outcome>true</outcome>
+                <value>0.11</value>
+            </probability>
+			<probability> 
+                <given>
+                    <fact>
+                        <parent>smoker</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                    <fact>
+                        <parent>age</parent>
+                        <outcome>child</outcome>
+                    </fact>
+                </given>
+                <outcome>true</outcome>
+                <value>0.22</value>
+            </probability>
+			<probability> 
+                <given>
+                    <fact>
+                        <parent>smoker</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                    <fact>
+                        <parent>age</parent>
+                        <outcome>adult</outcome>
+                    </fact>
+                </given>
+                <outcome>true</outcome>
+                <value>0.11</value>
+            </probability>
+			<probability> 
+                <given>
+                    <fact>
+                        <parent>smoker</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                    <fact>
+                        <parent>age</parent>
+                        <outcome>elder</outcome>
+                    </fact>
+                </given>
+                <outcome>true</outcome>
+                <value>0.13</value>
+            </probability>
+		</table>
     </node>
-
-
-    <node>
-        <name>oboseala</name>
+	<node>
+        <name>flu</name>
         <outcome>false</outcome>
         <outcome>true</outcome>
-		<parents>febra</parents>
+		<parents>age</parents>
 		
         <table>
-            <probability> <!-- P(0 | 0) -->
+            <probability> 
                 <given>
                     <fact>
-                        <parent>febra</parent>
-                        <outcome>false</outcome>
+                        <parent>age</parent>
+                        <outcome>child</outcome>
                     </fact>
                 </given>
                 <outcome>false</outcome>
-                <value>0.8</value>
+                <value>0.87</value>
             </probability>
 
-            <probability> <!-- P(0 | 1) -->
+            <probability> 
                 <given>
                     <fact>
-                        <parent>febra</parent>
-                        <outcome>true</outcome>
+                        <parent>age</parent>
+                        <outcome>adult</outcome>
                     </fact>
                 </given>
                 <outcome>false</outcome>
-                <value>0.4</value>
+                <value>0.92</value>
             </probability>
-
-            <probability> <!-- P(1 | 0) -->
+			<probability> 
                 <given>
                     <fact>
-                        <parent>febra</parent>
-                        <outcome>false</outcome>
+                        <parent>age</parent>
+                        <outcome>elder</outcome>
+                    </fact>
+                </given>
+                <outcome>false</outcome>
+                <value>0.91</value>
+            </probability>
+			
+			<probability> 
+                <given>
+                    <fact>
+                        <parent>age</parent>
+                        <outcome>child</outcome>
                     </fact>
                 </given>
                 <outcome>true</outcome>
-                <value>0.2</value>
+                <value>0.13</value>
             </probability>
 
-            <probability> <!-- P(1 | 1) -->
+            <probability> 
                 <given>
                     <fact>
-                        <parent>febra</parent>
-                        <outcome>true</outcome>
+                        <parent>age</parent>
+                        <outcome>adult</outcome>
                     </fact>
                 </given>
                 <outcome>true</outcome>
-                <value>0.6</value>
+                <value>0.08</value>
+            </probability>
+			<probability> 
+                <given>
+                    <fact>
+                        <parent>age</parent>
+                        <outcome>elder</outcome>
+                    </fact>
+                </given>
+                <outcome>true</outcome>
+                <value>0.09</value>
             </probability>
         </table>
     </node>
-
-    <node>
-        <name>anorexie</name>
+	<node>
+        <name>pneumonia</name>
         <outcome>false</outcome>
         <outcome>true</outcome>
-
-		<parents>febra</parents>
+		
+		<parents>smoker,age</parents>
 
         <table>
-            <probability> <!-- P(0 | 0) -->
+            <!-- Probabilitatile ca cold sa fie fals în ordine crescător binară -->
+            <probability> 
                 <given>
                     <fact>
-                        <parent>febra</parent>
+                        <parent>smoker</parent>
                         <outcome>false</outcome>
+                    </fact>
+                    <fact>
+                        <parent>age</parent>
+                        <outcome>child</outcome>
+                    </fact>
+                </given>
+                <outcome>false</outcome>
+                <value>0.94</value>
+            </probability>
+			<probability> 
+                <given>
+                    <fact>
+                        <parent>smoker</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                    <fact>
+                        <parent>age</parent>
+                        <outcome>adult</outcome>
+                    </fact>
+                </given>
+                <outcome>false</outcome>
+                <value>0.98</value>
+            </probability>
+			<probability> 
+                <given>
+                    <fact>
+                        <parent>smoker</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                    <fact>
+                        <parent>age</parent>
+                        <outcome>elder</outcome>
+                    </fact>
+                </given>
+                <outcome>false</outcome>
+                <value>0.97</value>
+            </probability>
+			<probability> 
+                <given>
+                    <fact>
+                        <parent>smoker</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                    <fact>
+                        <parent>age</parent>
+                        <outcome>child</outcome>
+                    </fact>
+                </given>
+                <outcome>false</outcome>
+                <value>0.91</value>
+            </probability>
+			<probability> 
+                <given>
+                    <fact>
+                        <parent>smoker</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                    <fact>
+                        <parent>age</parent>
+                        <outcome>adult</outcome>
+                    </fact>
+                </given>
+                <outcome>false</outcome>
+                <value>0.96</value>
+            </probability>
+			<probability> 
+                <given>
+                    <fact>
+                        <parent>smoker</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                    <fact>
+                        <parent>age</parent>
+                        <outcome>elder</outcome>
+                    </fact>
+                </given>
+                <outcome>false</outcome>
+                <value>0.93</value>
+            </probability>
+			<probability> 
+                <given>
+                    <fact>
+                        <parent>smoker</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                    <fact>
+                        <parent>age</parent>
+                        <outcome>child</outcome>
+                    </fact>
+                </given>
+                <outcome>true</outcome>
+                <value>0.06</value>
+            </probability>
+			<probability> 
+                <given>
+                    <fact>
+                        <parent>smoker</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                    <fact>
+                        <parent>age</parent>
+                        <outcome>adult</outcome>
+                    </fact>
+                </given>
+                <outcome>true</outcome>
+                <value>0.02</value>
+            </probability>
+			<probability> 
+                <given>
+                    <fact>
+                        <parent>smoker</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                    <fact>
+                        <parent>age</parent>
+                        <outcome>elder</outcome>
+                    </fact>
+                </given>
+                <outcome>true</outcome>
+                <value>0.03</value>
+            </probability>
+			<probability> 
+                <given>
+                    <fact>
+                        <parent>smoker</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                    <fact>
+                        <parent>age</parent>
+                        <outcome>child</outcome>
+                    </fact>
+                </given>
+                <outcome>true</outcome>
+                <value>0.09</value>
+            </probability>
+			<probability> 
+                <given>
+                    <fact>
+                        <parent>smoker</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                    <fact>
+                        <parent>age</parent>
+                        <outcome>adult</outcome>
+                    </fact>
+                </given>
+                <outcome>true</outcome>
+                <value>0.04</value>
+            </probability>
+			<probability> 
+                <given>
+                    <fact>
+                        <parent>smoker</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                    <fact>
+                        <parent>age</parent>
+                        <outcome>elder</outcome>
+                    </fact>
+                </given>
+                <outcome>true</outcome>
+                <value>0.07</value>
+            </probability>
+		</table>
+    </node>
+	
+	<node>
+        <name>astm</name>
+        <outcome>false</outcome>
+        <outcome>true</outcome>
+		<parents>sex</parents>
+		
+        <table>
+            <probability> 
+                <given>
+                    <fact>
+                        <parent>sex</parent>
+                        <outcome>f</outcome>
+                    </fact>
+                </given>
+                <outcome>false</outcome>
+                <value>0.93</value>
+            </probability>
+			<probability> 
+                <given>
+                    <fact>
+                        <parent>sex</parent>
+                        <outcome>m</outcome>
                     </fact>
                 </given>
                 <outcome>false</outcome>
                 <value>0.9</value>
             </probability>
-
-            <probability> <!-- P(0 | 1) -->
+			
+			<probability> 
                 <given>
                     <fact>
-                        <parent>febra</parent>
-                        <outcome>true</outcome>
+                        <parent>sex</parent>
+                        <outcome>f</outcome>
                     </fact>
                 </given>
-                <outcome>false</outcome>
-                <value>0.5</value>
+                <outcome>true</outcome>
+                <value>0.07</value>
             </probability>
-
-            <probability> <!-- P(1 | 0) -->
+			<probability> 
                 <given>
                     <fact>
-                        <parent>febra</parent>
-                        <outcome>false</outcome>
+                        <parent>sex</parent>
+                        <outcome>m</outcome>
                     </fact>
                 </given>
                 <outcome>true</outcome>
                 <value>0.1</value>
             </probability>
 
-            <probability> <!-- P(1 | 1) -->
+        </table>
+    </node>
+	
+	<node>
+        <name>sore throat</name>
+        <outcome>false</outcome>
+        <outcome>true</outcome>
+
+		<parents>cold,flu</parents>
+
+        <table>
+            <probability> <!-- P(0 | 00) -->
                 <given>
                     <fact>
-                        <parent>febra</parent>
+                        <parent>cold</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                    <fact>
+                        <parent>flu</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                </given>
+                <outcome>false</outcome>
+                <value>0.9</value>
+            </probability>
+			
+			<probability> <!-- P(0 | 01) -->
+                <given>
+                    <fact>
+                        <parent>cold</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                    <fact>
+                        <parent>flu</parent>
                         <outcome>true</outcome>
+                    </fact>
+                </given>
+                <outcome>false</outcome>
+                <value>0.16</value>
+            </probability>
+			<probability> <!-- P(0 | 10) -->
+                <given>
+                    <fact>
+                        <parent>cold</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                    <fact>
+                        <parent>flu</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                </given>
+                <outcome>false</outcome>
+                <value>0.5</value>
+            </probability>
+			<probability> <!-- P(0 | 11) -->
+                <given>
+                    <fact>
+                        <parent>cold</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                    <fact>
+                        <parent>flu</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                </given>
+                <outcome>false</outcome>
+                <value>0.05</value>
+            </probability>
+			<probability> <!-- P(1 | 00) -->
+                <given>
+                    <fact>
+                        <parent>cold</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                    <fact>
+                        <parent>flu</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                </given>
+                <outcome>true</outcome>
+                <value>0.1</value>
+            </probability>
+			
+			<probability> <!-- P(1 | 01) -->
+                <given>
+                    <fact>
+                        <parent>cold</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                    <fact>
+                        <parent>flu</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                </given>
+                <outcome>true</outcome>
+                <value>0.84</value>
+            </probability>
+			<probability> <!-- P(1 | 10) -->
+                <given>
+                    <fact>
+                        <parent>cold</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                    <fact>
+                        <parent>flu</parent>
+                        <outcome>false</outcome>
                     </fact>
                 </given>
                 <outcome>true</outcome>
                 <value>0.5</value>
             </probability>
+			<probability> <!-- P(1 | 11) -->
+                <given>
+                    <fact>
+                        <parent>cold</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                    <fact>
+                        <parent>flu</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                </given>
+                <outcome>true</outcome>
+                <value>0.95</value>
+            </probability>
         </table>
     </node>
-</net>
+	<node>
+        <name>weight loss</name>
+        <outcome>false</outcome>
+        <outcome>true</outcome>
 
+		<parents>pneumonia,cancer</parents>
+
+        <table>
+            <probability> <!-- P(0 | 00) -->
+                <given>
+                    <fact>
+                        <parent>pneumonia</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                    <fact>
+                        <parent>cancer</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                </given>
+                <outcome>false</outcome>
+                <value>0.96</value>
+            </probability>
+			
+			<probability> <!-- P(0 | 01) -->
+                <given>
+                    <fact>
+                        <parent>pneumonia</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                    <fact>
+                        <parent>cancer</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                </given>
+                <outcome>false</outcome>
+                <value>0.3</value>
+            </probability>
+			<probability> <!-- P(0 | 10) -->
+                <given>
+                    <fact>
+                        <parent>pneumonia</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                    <fact>
+                        <parent>cancer</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                </given>
+                <outcome>false</outcome>
+                <value>0.6</value>
+            </probability>
+			<probability> <!-- P(0 | 11) -->
+                <given>
+                    <fact>
+                        <parent>pneumonia</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                    <fact>
+                        <parent>cancer</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                </given>
+                <outcome>false</outcome>
+                <value>0.04</value>
+            </probability>
+			<probability> <!-- P(1 | 00) -->
+                <given>
+                    <fact>
+                        <parent>pneumonia</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                    <fact>
+                        <parent>cancer</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                </given>
+                <outcome>true</outcome>
+                <value>0.04</value>
+            </probability>
+			
+			<probability> <!-- P(1 | 01) -->
+                <given>
+                    <fact>
+                        <parent>pneumonia</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                    <fact>
+                        <parent>cancer</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                </given>
+                <outcome>true</outcome>
+                <value>0.7</value>
+            </probability>
+			<probability> <!-- P(1 | 10) -->
+                <given>
+                    <fact>
+                        <parent>pneumonia</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                    <fact>
+                        <parent>cancer</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                </given>
+                <outcome>true</outcome>
+                <value>0.4</value>
+            </probability>
+			<probability> <!-- P(1 | 11) -->
+                <given>
+                    <fact>
+                        <parent>pneumonia</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                    <fact>
+                        <parent>cancer</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                </given>
+                <outcome>true</outcome>
+                <value>0.96</value>
+            </probability>
+        </table>
+    </node>
+	
+	<node>
+        <name>cancer</name> 
+        <outcome>false</outcome>
+        <outcome>true</outcome>
+		
+		<parents>smoker,age</parents>
+
+        <table>
+            <!-- Probabilitatile ca cancer sa fie fals în ordine crescător binară -->
+            <probability> 
+                <given>
+                    <fact>
+                        <parent>smoker</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                    <fact>
+                        <parent>age</parent>
+                        <outcome>child</outcome>
+                    </fact>
+                </given>
+                <outcome>false</outcome>
+                <value>1</value>
+            </probability>
+			<probability> 
+                <given>
+                    <fact>
+                        <parent>smoker</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                    <fact>
+                        <parent>age</parent>
+                        <outcome>adult</outcome>
+                    </fact>
+                </given>
+                <outcome>false</outcome>
+                <value>0.99975</value>
+            </probability>
+			<probability> 
+                <given>
+                    <fact>
+                        <parent>smoker</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                    <fact>
+                        <parent>age</parent>
+                        <outcome>elder</outcome>
+                    </fact>
+                </given>
+                <outcome>false</outcome>
+                <value>0.9943</value>
+            </probability>
+			<probability> 
+                <given>
+                    <fact>
+                        <parent>smoker</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                    <fact>
+                        <parent>age</parent>
+                        <outcome>child</outcome>
+                    </fact>
+                </given>
+                <outcome>false</outcome>
+                <value>1</value>
+            </probability>
+			<probability> 
+                <given>
+                    <fact>
+                        <parent>smoker</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                    <fact>
+                        <parent>age</parent>
+                        <outcome>adult</outcome>
+                    </fact>
+                </given>
+                <outcome>false</outcome>
+                <value>0.99967</value>
+            </probability>
+			<probability> 
+                <given>
+                    <fact>
+                        <parent>smoker</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                    <fact>
+                        <parent>age</parent>
+                        <outcome>elder</outcome>
+                    </fact>
+                </given>
+                <outcome>false</outcome>
+                <value>0.993</value>
+            </probability>
+			<probability> 
+                <given>
+                    <fact>
+                        <parent>smoker</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                    <fact>
+                        <parent>age</parent>
+                        <outcome>child</outcome>
+                    </fact>
+                </given>
+                <outcome>true</outcome>
+                <value>0</value>
+            </probability>
+			<probability> 
+                <given>
+                    <fact>
+                        <parent>smoker</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                    <fact>
+                        <parent>age</parent>
+                        <outcome>adult</outcome>
+                    </fact>
+                </given>
+                <outcome>true</outcome>
+                <value>0.00025</value>
+            </probability>
+			<probability> 
+                <given>
+                    <fact>
+                        <parent>smoker</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                    <fact>
+                        <parent>age</parent>
+                        <outcome>elder</outcome>
+                    </fact>
+                </given>
+                <outcome>true</outcome>
+                <value>0.0057</value>
+            </probability>
+			<probability> 
+                <given>
+                    <fact>
+                        <parent>smoker</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                    <fact>
+                        <parent>age</parent>
+                        <outcome>child</outcome>
+                    </fact>
+                </given>
+                <outcome>true</outcome>
+                <value>0</value>
+            </probability>
+			<probability> 
+                <given>
+                    <fact>
+                        <parent>smoker</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                    <fact>
+                        <parent>age</parent>
+                        <outcome>adult</outcome>
+                    </fact>
+                </given>
+                <outcome>true</outcome>
+                <value>0.00033</value>
+            </probability>
+			<probability> 
+                <given>
+                    <fact>
+                        <parent>smoker</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                    <fact>
+                        <parent>age</parent>
+                        <outcome>elder</outcome>
+                    </fact>
+                </given>
+                <outcome>true</outcome>
+                <value>0.007</value>
+            </probability>
+		</table>
+    </node>
+	
+	<node>
+        <name>fever</name>
+        <outcome>false</outcome>
+        <outcome>true</outcome>
+
+		<parents>cold,flu,pneumonia</parents>
+
+        <table>
+            <probability> <!-- P(0 | 000) -->
+                <given>
+				    <fact>
+                        <parent>cold</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                    <fact>
+                        <parent>flu</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                    <fact>
+                        <parent>pneumonia</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                </given>
+                <outcome>false</outcome>
+                <value>0.96</value>
+            </probability>
+			<probability> <!-- P(0 | 001) -->
+                <given>
+				    <fact>
+                        <parent>cold</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                    <fact>
+                        <parent>flu</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                    <fact>
+                        <parent>pneumonia</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                </given>
+                <outcome>false</outcome>
+                <value>0.05</value>
+            </probability>
+			<probability> <!-- P(0 | 010) -->
+                <given>
+				    <fact>
+                        <parent>cold</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                    <fact>
+                        <parent>flu</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                    <fact>
+                        <parent>pneumonia</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                </given>
+                <outcome>false</outcome>
+                <value>0.1</value>
+            </probability>
+			<probability> <!-- P(0 | 011) -->
+                <given>
+				    <fact>
+                        <parent>cold</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                    <fact>
+                        <parent>flu</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                    <fact>
+                        <parent>pneumonia</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                </given>
+                <outcome>false</outcome>
+                <value>0.01</value>
+            </probability>
+			<probability> <!-- P(0 | 100) -->
+                <given>
+				    <fact>
+                        <parent>cold</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                    <fact>
+                        <parent>flu</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                    <fact>
+                        <parent>pneumonia</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                </given>
+                <outcome>false</outcome>
+                <value>0.75</value>
+            </probability>
+			<probability> <!-- P(0 | 101) -->
+                <given>
+				    <fact>
+                        <parent>cold</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                    <fact>
+                        <parent>flu</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                    <fact>
+                        <parent>pneumonia</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                </given>
+                <outcome>false</outcome>
+                <value>0.02</value>
+            </probability>
+			<probability> <!-- P(0 | 110) -->
+                <given>
+				    <fact>
+                        <parent>cold</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                    <fact>
+                        <parent>flu</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                    <fact>
+                        <parent>pneumonia</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                </given>
+                <outcome>false</outcome>
+                <value>0.05</value>
+            </probability>
+			<probability> <!-- P(0 | 111) -->
+                <given>
+				    <fact>
+                        <parent>cold</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                    <fact>
+                        <parent>flu</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                    <fact>
+                        <parent>pneumonia</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                </given>
+                <outcome>false</outcome>
+                <value>0</value>
+            </probability>
+			<probability> <!-- P(1 | 000) -->
+                <given>
+				    <fact>
+                        <parent>cold</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                    <fact>
+                        <parent>flu</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                    <fact>
+                        <parent>pneumonia</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                </given>
+                <outcome>true</outcome>
+                <value>0.04</value>
+            </probability>
+			<probability> <!-- P(1 | 001) -->
+                <given>
+				    <fact>
+                        <parent>cold</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                    <fact>
+                        <parent>flu</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                    <fact>
+                        <parent>pneumonia</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                </given>
+                <outcome>true</outcome>
+                <value>0.95</value>
+            </probability>
+			<probability> <!-- P(1 | 010) -->
+                <given>
+				    <fact>
+                        <parent>cold</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                    <fact>
+                        <parent>flu</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                    <fact>
+                        <parent>pneumonia</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                </given>
+                <outcome>true</outcome>
+                <value>0.9</value>
+            </probability>
+			<probability> <!-- P(1 | 011) -->
+                <given>
+				    <fact>
+                        <parent>cold</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                    <fact>
+                        <parent>flu</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                    <fact>
+                        <parent>pneumonia</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                </given>
+                <outcome>true</outcome>
+                <value>0.99</value>
+            </probability>
+			<probability> <!-- P(1 | 100) -->
+                <given>
+				    <fact>
+                        <parent>cold</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                    <fact>
+                        <parent>flu</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                    <fact>
+                        <parent>pneumonia</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                </given>
+                <outcome>true</outcome>
+                <value>0.25</value>
+            </probability>
+			<probability> <!-- P(1 | 101) -->
+                <given>
+				    <fact>
+                        <parent>cold</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                    <fact>
+                        <parent>flu</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                    <fact>
+                        <parent>pneumonia</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                </given>
+                <outcome>true</outcome>
+                <value>0.98</value>
+            </probability>
+			<probability> <!-- P(1 | 110) -->
+                <given>
+				    <fact>
+                        <parent>cold</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                    <fact>
+                        <parent>flu</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                    <fact>
+                        <parent>pneumonia</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                </given>
+                <outcome>true</outcome>
+                <value>0.95</value>
+            </probability>
+			<probability> <!-- P(1 | 111) -->
+                <given>
+				    <fact>
+                        <parent>cold</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                    <fact>
+                        <parent>flu</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                    <fact>
+                        <parent>pneumonia</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                </given>
+                <outcome>true</outcome>
+                <value>1</value>
+            </probability>
+		</table>
+	</node>
+	<node>
+        <name>fever</name>
+        <outcome>false</outcome>
+        <outcome>true</outcome>
+
+		<parents>pneumonia,cancer,astm</parents>
+
+        <table>
+            <probability> <!-- P(0 | 000) -->
+                <given>
+					<fact>
+                        <parent>pneumonia</parent>
+                        <outcome>false</outcome>
+                    </fact>
+				    <fact>
+                        <parent>cancer</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                    <fact>
+                        <parent>astm</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                </given>
+                <outcome>false</outcome>
+                <value>0.98</value>
+            </probability>
+			<probability> <!-- P(0 | 001) -->
+                <given>
+					<fact>
+                        <parent>pneumonia</parent>
+                        <outcome>false</outcome>
+                    </fact>
+				    <fact>
+                        <parent>cancer</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                    <fact>
+                        <parent>astm</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                </given>
+                <outcome>false</outcome>
+                <value>0.24</value>
+            </probability>
+			<probability> <!-- P(0 | 010) -->
+                <given>
+					<fact>
+                        <parent>pneumonia</parent>
+                        <outcome>false</outcome>
+                    </fact>
+				    <fact>
+                        <parent>cancer</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                    <fact>
+                        <parent>astm</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                </given>
+                <outcome>false</outcome>
+                <value>0.75</value>
+            </probability>
+			<probability> <!-- P(0 | 011) -->
+                <given>
+					<fact>
+                        <parent>pneumonia</parent>
+                        <outcome>false</outcome>
+                    </fact>
+				    <fact>
+                        <parent>cancer</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                    <fact>
+                        <parent>astm</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                </given>
+                <outcome>false</outcome>
+                <value>0.13</value>
+            </probability>
+			<probability> <!-- P(0 | 100) -->
+                <given>
+					<fact>
+                        <parent>pneumonia</parent>
+                        <outcome>true</outcome>
+                    </fact>
+				    <fact>
+                        <parent>cancer</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                    <fact>
+                        <parent>astm</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                </given>
+                <outcome>false</outcome>
+                <value>0.2</value>
+            </probability>
+			<probability> <!-- P(0 | 101) -->
+                <given>
+					<fact>
+                        <parent>pneumonia</parent>
+                        <outcome>true</outcome>
+                    </fact>
+				    <fact>
+                        <parent>cancer</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                    <fact>
+                        <parent>astm</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                </given>
+                <outcome>false</outcome>
+                <value>0.07</value>
+            </probability>
+			<probability> <!-- P(0 | 110) -->
+                <given>
+					<fact>
+                        <parent>pneumonia</parent>
+                        <outcome>true</outcome>
+                    </fact>
+				    <fact>
+                        <parent>cancer</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                    <fact>
+                        <parent>astm</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                </given>
+                <outcome>false</outcome>
+                <value>0.1</value>
+            </probability>
+			<probability> <!-- P(0 | 111) -->
+                <given>
+					<fact>
+                        <parent>pneumonia</parent>
+                        <outcome>true</outcome>
+                    </fact>
+				    <fact>
+                        <parent>cancer</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                    <fact>
+                        <parent>astm</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                </given>
+                <outcome>false</outcome>
+                <value>0.007</value>
+            </probability>
+			<probability> <!-- P(1 | 000) -->
+                <given>
+					<fact>
+                        <parent>pneumonia</parent>
+                        <outcome>false</outcome>
+                    </fact>
+				    <fact>
+                        <parent>cancer</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                    <fact>
+                        <parent>astm</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                </given>
+                <outcome>true</outcome>
+                <value>0.02</value>
+            </probability>
+			<probability> <!-- P(1 | 001) -->
+                <given>
+					<fact>
+                        <parent>pneumonia</parent>
+                        <outcome>false</outcome>
+                    </fact>
+				    <fact>
+                        <parent>cancer</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                    <fact>
+                        <parent>astm</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                </given>
+                <outcome>true</outcome>
+                <value>0.76</value>
+            </probability>
+			<probability> <!-- P(1 | 010) -->
+                <given>
+					<fact>
+                        <parent>pneumonia</parent>
+                        <outcome>false</outcome>
+                    </fact>
+				    <fact>
+                        <parent>cancer</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                    <fact>
+                        <parent>astm</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                </given>
+                <outcome>true</outcome>
+                <value>0.25</value>
+            </probability>
+			<probability> <!-- P(1 | 011) -->
+                <given>
+					<fact>
+                        <parent>pneumonia</parent>
+                        <outcome>false</outcome>
+                    </fact>
+				    <fact>
+                        <parent>cancer</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                    <fact>
+                        <parent>astm</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                </given>
+                <outcome>true</outcome>
+                <value>0.87</value>
+            </probability>
+			<probability> <!-- P(1 | 100) -->
+                <given>
+					<fact>
+                        <parent>pneumonia</parent>
+                        <outcome>true</outcome>
+                    </fact>
+				    <fact>
+                        <parent>cancer</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                    <fact>
+                        <parent>astm</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                </given>
+                <outcome>true</outcome>
+                <value>0.8</value>
+            </probability>
+			<probability> <!-- P(1 | 101) -->
+                <given>
+					<fact>
+                        <parent>pneumonia</parent>
+                        <outcome>true</outcome>
+                    </fact>
+				    <fact>
+                        <parent>cancer</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                    <fact>
+                        <parent>astm</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                </given>
+                <outcome>true</outcome>
+                <value>0.93</value>
+            </probability>
+			<probability> <!-- P(1 | 110) -->
+                <given>
+					<fact>
+                        <parent>pneumonia</parent>
+                        <outcome>true</outcome>
+                    </fact>
+				    <fact>
+                        <parent>cancer</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                    <fact>
+                        <parent>astm</parent>
+                        <outcome>false</outcome>
+                    </fact>
+                </given>
+                <outcome>true</outcome>
+                <value>0.9</value>
+            </probability>
+			<probability> <!-- P(1 | 111) -->
+                <given>
+					<fact>
+                        <parent>pneumonia</parent>
+                        <outcome>true</outcome>
+                    </fact>
+				    <fact>
+                        <parent>cancer</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                    <fact>
+                        <parent>astm</parent>
+                        <outcome>true</outcome>
+                    </fact>
+                </given>
+                <outcome>true</outcome>
+                <value>0.993</value>
+            </probability>
+			
+		</table>
+	</node>
+
+</net>
 <!--
 <probability>
     <given></given>

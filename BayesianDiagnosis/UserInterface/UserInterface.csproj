@@ -55,6 +55,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -77,6 +80,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BayesianNetwork\BayesianNetwork.csproj">
+      <Project>{9b6108a0-1d3c-4b04-aa12-80f00446ccb5}</Project>
+      <Name>BayesianNetwork</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NetworkParser\NetworkParser.csproj">
+      <Project>{55c4dcc3-f1b1-472c-9147-5bf53e08e34e}</Project>
+      <Name>NetworkParser</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
