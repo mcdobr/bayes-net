@@ -12,11 +12,11 @@ using BayesianNetwork;
 
 namespace UserInterface
 {
-    public partial class Form1 : Form
+    public partial class BayesianInterface : Form
     {
         static Network network = Parser.parse("diseases.xml");
         
-        public Form1()
+        public BayesianInterface()
         {
             InitializeComponent();
         }
@@ -55,7 +55,7 @@ namespace UserInterface
             {
                 Node disease = network.Nodes[i];
                 Query question = new Query(disease, "true", evidence);
-                list_answer.Add(string.Format("{0} => {1}", network.answer(question), disease.ToString()));
+                list_answer.Add(string.Format("{0} %   => {1}",Math.Round( network.answer(question)*100, 2, MidpointRounding.AwayFromZero), disease.ToString()));
             }
             sortare(list_answer);
             afisare(list_answer);
@@ -76,8 +76,8 @@ namespace UserInterface
                 }
                 k++;
             }
-            afisare(list);
             TestAskingInferentialQuestion(list);
         }
+
     }
 }

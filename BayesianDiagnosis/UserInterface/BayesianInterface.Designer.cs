@@ -1,6 +1,6 @@
 ﻿namespace UserInterface
 {
-    partial class Form1
+    partial class BayesianInterface
     {
         /// <summary>
         /// Required designer variable.
@@ -141,7 +141,7 @@
             this.checkedListBox4.Size = new System.Drawing.Size(61, 49);
             this.checkedListBox4.TabIndex = 10;
             // 
-            // Form1
+            // BayesianInterface
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -156,8 +156,8 @@
             this.Controls.Add(this.checkedListBox3);
             this.Controls.Add(this.checkedListBox2);
             this.Controls.Add(this.checkedListBox1);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "BayesianInterface";
+            this.Text = "BayesianInterface";
             this.ResumeLayout(false);
             this.PerformLayout();
 
