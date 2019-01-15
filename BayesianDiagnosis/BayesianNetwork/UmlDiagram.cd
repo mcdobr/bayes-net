@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="BayesianNetwork.Fact">
+    <Position X="6.75" Y="4.75" Width="3.75" />
+    <Members>
+      <Field Name="node" Hidden="true" />
+      <Field Name="value" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAEgAAAAAAAAAAAAKAAAAAgAAEAAAA=</HashCode>
+      <FileName>Fact.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BayesianNetwork.Network">
+    <Position X="1.25" Y="0.75" Width="5.75" />
+    <Members>
+      <Method Name="Network" Hidden="true" />
+      <Field Name="nodes" Hidden="true" />
+      <Method Name="removeLink" Hidden="true" />
+      <Method Name="removeNode" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAUAAAAAAAAAAAAAAAgAAAEABggAAAAIQI=</HashCode>
+      <FileName>Network.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BayesianNetwork.Node">
+    <Position X="1.25" Y="4.5" Width="5" />
+    <Members>
+      <Field Name="causes" Hidden="true" />
+      <Field Name="domainValues" Hidden="true" />
+      <Field Name="effects" Hidden="true" />
+      <Field Name="name" Hidden="true" />
+      <Field Name="network" Hidden="true" />
+      <Field Name="probabilityDistribution" Hidden="true" />
+      <Method Name="removeCause" Hidden="true" />
+      <Method Name="removeEffect" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>QAAAAEQBAAAAAAAEAAQAAEREAAAEAIAARAAAAAQgAAA=</HashCode>
+      <FileName>Node.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BayesianNetwork.Query">
+    <Position X="7.5" Y="1" Width="4" />
+    <Members>
+      <Field Name="facts" Hidden="true" />
+      <Field Name="target" Hidden="true" />
+      <Field Name="value" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAABAAAoAAAACAAAAAAAKAAAAAgAAAAQAA=</HashCode>
+      <FileName>Query.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

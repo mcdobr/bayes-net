@@ -85,9 +85,7 @@ namespace BayesianNetwork
         private Dictionary<Query, double> enumerationAsk(Node target, ICollection<Fact> facts)
         {
             var distribution = new Dictionary<Query, double>();
-            //var nodes = new List<Node>(target.Network.Nodes.Values);
             var nodes = topologicalSort(target.Network.Nodes.Values);
-
 
             foreach (var possibleValue in target.DomainValues)
             {
