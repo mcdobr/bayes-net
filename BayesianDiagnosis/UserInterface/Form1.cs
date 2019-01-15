@@ -14,7 +14,7 @@ namespace UserInterface
 {
     public partial class Form1 : Form
     {
-        static Network network = Parser.parse("disease.xml");
+        static Network network = Parser.parse("diseases.xml");
         
         public Form1()
         {
