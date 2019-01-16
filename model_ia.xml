@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BIF VERSION="0.3"  xmlns="http://www.cs.ubc.ca/labs/lci/fopi/ve/XMLBIFv0_3"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.cs.ubc.ca/labs/lci/fopi/ve/XMLBIFv0_3 http://www.cs.ubc.ca/labs/lci/fopi/ve/XMLBIFv0_3/XMLBIFv0_3.xsd">
+<NETWORK>
+<NAME>Untitled</NAME>
+
+<VARIABLE TYPE="nature">
+	<NAME>Flu</NAME>
+	<OUTCOME>false</OUTCOME>
+	<OUTCOME>true</OUTCOME>
+	<PROPERTY>position = (7277.0, 5216.0)</PROPERTY>
+</VARIABLE>
+
+<VARIABLE TYPE="nature">
+	<NAME>Pneumonia</NAME>
+	<OUTCOME>false</OUTCOME>
+	<OUTCOME>true</OUTCOME>
+	<PROPERTY>position = (7396.0, 5224.0)</PROPERTY>
+</VARIABLE>
+
+<VARIABLE TYPE="nature">
+	<NAME>Cold</NAME>
+	<OUTCOME>false</OUTCOME>
+	<OUTCOME>true</OUTCOME>
+	<PROPERTY>position = (7156.0, 5222.0)</PROPERTY>
+</VARIABLE>
+
+<VARIABLE TYPE="nature">
+	<NAME>Sore throat</NAME>
+	<OUTCOME>false</OUTCOME>
+	<OUTCOME>true</OUTCOME>
+	<PROPERTY>position = (7202.0, 5313.0)</PROPERTY>
+</VARIABLE>
+
+<VARIABLE TYPE="nature">
+	<NAME>fever</NAME>
+	<OUTCOME>false</OUTCOME>
+	<OUTCOME>true</OUTCOME>
+	<PROPERTY>position = (7338.0, 5315.0)</PROPERTY>
+</VARIABLE>
+
+<VARIABLE TYPE="nature">
+	<NAME>Weight loss</NAME>
+	<OUTCOME>false</OUTCOME>
+	<OUTCOME>true</OUTCOME>
+	<PROPERTY>position = (7463.0, 5318.0)</PROPERTY>
+</VARIABLE>
+
+<VARIABLE TYPE="nature">
+	<NAME>age</NAME>
+	<OUTCOME>child</OUTCOME>
+	<OUTCOME>adult</OUTCOME>
+	<OUTCOME>elder</OUTCOME>
+	<PROPERTY>position = (7415.0, 5069.0)</PROPERTY>
+</VARIABLE>
+
+<VARIABLE TYPE="nature">
+	<NAME>Lung cancer</NAME>
+	<OUTCOME>false</OUTCOME>
+	<OUTCOME>true</OUTCOME>
+	<PROPERTY>position = (7514.0, 5223.0)</PROPERTY>
+</VARIABLE>
+
+<VARIABLE TYPE="nature">
+	<NAME>smoker</NAME>
+	<OUTCOME>false</OUTCOME>
+	<OUTCOME>true</OUTCOME>
+	<PROPERTY>position = (7197.0, 5087.0)</PROPERTY>
+</VARIABLE>
+
+<VARIABLE TYPE="nature">
+	<NAME>sex</NAME>
+	<OUTCOME>female</OUTCOME>
+	<OUTCOME>male</OUTCOME>
+	<PROPERTY>position = (7568.0, 5100.0)</PROPERTY>
+</VARIABLE>
+
+<VARIABLE TYPE="nature">
+	<NAME>Asthma</NAME>
+	<OUTCOME>false</OUTCOME>
+	<OUTCOME>true</OUTCOME>
+	<PROPERTY>position = (7635.0, 5219.0)</PROPERTY>
+</VARIABLE>
+
+<VARIABLE TYPE="nature">
+	<NAME>Chest pain</NAME>
+	<OUTCOME>false</OUTCOME>
+	<OUTCOME>true</OUTCOME>
+	<PROPERTY>position = (7609.0, 5329.0)</PROPERTY>
+</VARIABLE>
+
+<DEFINITION>
+	<FOR>Flu</FOR>
+	<GIVEN>age</GIVEN>
+	<TABLE>0.87 0.13 0.92 0.08 0.91 0.09</TABLE>
+</DEFINITION>
+
+<DEFINITION>
+	<FOR>Pneumonia</FOR>
+	<GIVEN>age</GIVEN>
+	<GIVEN>smoker</GIVEN>
+	<TABLE>0.94 0.06 0.91 0.09 0.98 0.02 0.96 0.04 0.97 0.03 0.93 0.07</TABLE>
+</DEFINITION>
+
+<DEFINITION>
+	<FOR>Cold</FOR>
+	<GIVEN>age</GIVEN>
+	<GIVEN>smoker</GIVEN>
+	<TABLE>0.83 0.17 0.78 0.22 0.91 0.09 0.89 0.11 0.89 0.11 0.87 0.13</TABLE>
+</DEFINITION>
+
+<DEFINITION>
+	<FOR>Sore throat</FOR>
+	<GIVEN>Flu</GIVEN>
+	<GIVEN>Cold</GIVEN>
+	<TABLE>0.9 0.1 0.5 0.5 0.16 0.84 0.05 0.95</TABLE>
+</DEFINITION>
+
+<DEFINITION>
+	<FOR>fever</FOR>
+	<GIVEN>Flu</GIVEN>
+	<GIVEN>Pneumonia</GIVEN>
+	<GIVEN>Cold</GIVEN>
+	<TABLE>0.96 0.04 0.75 0.25 0.05 0.95 0.02 0.98 0.1 0.9 0.05 0.95 0.01 0.99 0.0 1.0</TABLE>
+</DEFINITION>
+
+<DEFINITION>
+	<FOR>Weight loss</FOR>
+	<GIVEN>Pneumonia</GIVEN>
+	<GIVEN>Lung cancer</GIVEN>
+	<TABLE>0.96 0.04 0.3 0.7 0.6 0.4 0.04 0.96</TABLE>
+</DEFINITION>
+
+<DEFINITION>
+	<FOR>age</FOR>
+	<TABLE>0.2544 0.6586 0.087</TABLE>
+</DEFINITION>
+
+<DEFINITION>
+	<FOR>Lung cancer</FOR>
+	<GIVEN>age</GIVEN>
+	<GIVEN>smoker</GIVEN>
+	<TABLE>1.0 0.0 0.99975 2.5E-4 0.9943 0.0057 1.0 0.0 0.9967 0.0033 0.993 0.007</TABLE>
+</DEFINITION>
+
+<DEFINITION>
+	<FOR>smoker</FOR>
+	<TABLE>0.86 0.14</TABLE>
+</DEFINITION>
+
+<DEFINITION>
+	<FOR>sex</FOR>
+	<TABLE>0.5 0.5</TABLE>
+</DEFINITION>
+
+<DEFINITION>
+	<FOR>Asthma</FOR>
+	<GIVEN>sex</GIVEN>
+	<TABLE>0.93 0.07 0.9 0.1</TABLE>
+</DEFINITION>
+
+<DEFINITION>
+	<FOR>Chest pain</FOR>
+	<GIVEN>Pneumonia</GIVEN>
+	<GIVEN>Lung cancer</GIVEN>
+	<GIVEN>Asthma</GIVEN>
+	<TABLE>0.98 0.02 0.24 0.76 0.75 0.25 0.13 0.87 0.2 0.8 0.07 0.93 0.1 0.9 0.007 0.993</TABLE>
+</DEFINITION>
+</NETWORK>
+</BIF>
